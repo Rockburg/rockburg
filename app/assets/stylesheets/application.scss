@@ -84,3 +84,22 @@ button {
     &.skill_increase { &:before { background: $purple; } }
   }
 }
+
+.badge-listing {
+  .badge {
+    padding: 8px 10px 8px 25px;
+    position: relative;
+    margin-right: 5px;
+    &:before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      display: block;
+      background: $white;
+      left: 10px;
+      top: 9px;
+      position: absolute;
+      border-radius: 100px;
+    }
+  }
+}
