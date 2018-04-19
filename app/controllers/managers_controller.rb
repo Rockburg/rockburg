@@ -4,6 +4,7 @@ class ManagersController < ApplicationController
   def index
     @manager = current_manager
     @bands = current_manager.bands.all
+    @badges = current_manager.badges
     render(:action => 'show')
   end
 
