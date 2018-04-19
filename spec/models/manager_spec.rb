@@ -11,6 +11,7 @@
 #  encrypted_password     :string           default(""), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
+#  level                  :integer          default(0)
 #  name                   :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -18,6 +19,7 @@
 #  sign_in_count          :integer          default(0), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  sash_id                :integer
 #
 # Indexes
 #

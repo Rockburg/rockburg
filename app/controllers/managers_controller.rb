@@ -10,5 +10,6 @@ class ManagersController < ApplicationController
   def show
     @manager = Manager.find(params[:id])
     @bands = @manager.bands.all
+    @badges = @manager.badges
   end
 end

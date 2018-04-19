@@ -26,3 +26,10 @@
   </div>
   <% end %>
 </div>
+<hr>
+<h2>Badges</h2>
+  <div class="badge-listing">
+    <% @badges.each do |badge| %>
+    <span class="badge badge-pill badge-secondary" title="<%= badge.description %>"><%= badge.name %></span>
+    <% end %>
+  </div>
