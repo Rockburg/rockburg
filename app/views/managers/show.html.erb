@@ -1,4 +1,4 @@
-<h1><%= image_tag @manager.avatar_url, class: 'avatar rounded float-left', width: "50px" %> <%= @manager.name %> <b class="badge badge-success"><%= as_game_currency(@manager.balance) %></b> <small><%= link_to "Edit profile", edit_manager_registration_path, class: 'float-right' %></small></h1>
+<h1><%= image_tag @manager.avatar_url, class: 'avatar rounded float-left', width: "50px" %> <%= @manager.name %> <b class="badge badge-success"><%= as_game_currency(@manager.balance) %></b> <% if current_manager == @manager %><small><%= link_to "Edit profile", edit_manager_registration_path, class: 'float-right' %></small><% end %></h1>
 <hr>
 <h2>Bands <%= link_to "Start a new band", new_band_path, class: 'btn btn-primary btn-sm' if current_manager == @manager %></h2>
 <div class="row">
