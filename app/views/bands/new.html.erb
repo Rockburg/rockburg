@@ -9,5 +9,5 @@
     <%= f.label :genre %>
     <%= f.collection_select :genre_id, Genre.all.order(:name), :id, :full_genre, {include_blank: true}, {class: 'form-control'} %>
   </div>
-  <%= f.submit "Start your band (§10,000)", class: 'btn btn-primary' %>
+  <%= f.submit "Start your band", class: 'btn btn-primary' %>
 <% end %>

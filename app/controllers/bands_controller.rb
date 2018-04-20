@@ -12,7 +12,6 @@ class BandsController < ApplicationController
     @band = Band.new(band_params)
     @band.manager = current_manager
     if @band.save
-      Manager::SpendMoney.(manager: current_manager, amount: 10_000, band: @band)
       @band.happenings.create(what: "#{@band.name} has just been formed!", kind: 'new')
       redirect_to @band, alert: "Band created successfully."
     else

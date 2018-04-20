@@ -126,7 +126,7 @@
         </div>
 
         <!-- Play gig -->
-        <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_play_gig"<% if @band.overly_fatigued_members? %> disabled<% end %>>Play a gig<% if @band.overly_fatigued_members? %> <b class="badge badge-info">Your members are too fatigued!</b> <% end %> <br /><small>Gigs help you gain fans and make some money.</small></button>
+        <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_play_gig"<% if @band.overly_fatigued_members? or @band.songs.count <= 0 %> disabled<% end %>>Play a gig<% if @band.overly_fatigued_members? %> <b class="badge badge-info">Your members are too fatigued!</b> <% end %><% if @band.songs.count <= 0 %> <b class="badge badge-info">You need to write a song first!</b> <% end %> <br /><small>Gigs help you gain fans and make some money.</small></button>
 
         <div class="modal fade" id="modal_play_gig" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">

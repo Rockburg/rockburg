@@ -49,6 +49,7 @@ class Manager < ApplicationRecord
 
   ## -- CALLBACKS
   after_create :give_starting_balance
+  after_create :give_badge
 
   ## — INSTANCE METHODS
   def to_param
@@ -56,9 +57,12 @@ class Manager < ApplicationRecord
   end
 
   def give_starting_balance
-    self.add_badge(1)
-    self.financials.create!(amount: 50_000) if !self.financials.exists?
+    self.financials.create!(amount: 500) if !self.financials.exists?
     self.update_balance
+  end
+
+  def give_badge
+    self.add_badge(1)
   end
 
   def update_balance
