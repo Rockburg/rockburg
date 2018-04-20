@@ -13,4 +13,8 @@ class ManagersController < ApplicationController
     @bands = @manager.bands.all
     @badges = @manager.badges
   end
+
+  def edit
+    @manager = current_manager
+  end
 end
