@@ -11,6 +11,9 @@ class Band::DailyUpdate < ApplicationService
 
   def call
     calc_daily_running_costs(band)
+    calc_release_earnings(band)
+    decay_buzz(band)
+    decay_fans(band)
   end
 
   def calc_daily_running_costs(band)
