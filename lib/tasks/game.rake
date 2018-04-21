@@ -15,9 +15,10 @@ namespace :game do
     Song.delete_all
     SingleAlbum.delete_all
 
-    puts "  Setting Starting Balance on Existing Managers".yellow
+    puts "  Setting Starting Balance on Existing Managers and reset count".yellow
     Manager.find_each do |manager|
       manager.give_starting_balance
+      Manager.reset_counters(manager.id, :bands)
     end
 
     puts "  Creating New Members".yellow
