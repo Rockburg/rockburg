@@ -23,7 +23,7 @@ class Band::DailyUpdate < ApplicationService
     # Rest
     Band::RemoveFatigue.(band: band, hours: 8)
 
-    band.happenings.create(what: "#{band.name} spent §#{daily_running_costs} on daily running costs.", kind: 'spent')
+    band.happenings.create(what: "#{band.name} spent #{as_game_currency(daily_running_costs)} on daily running costs.", kind: 'spent')
 
     context.daily_running_costs = daily_running_costs
   end
@@ -35,7 +35,7 @@ class Band::DailyUpdate < ApplicationService
 
       context.earnings = earnings
       recording.increment!(:sales, earnings)
-      band.happenings.create(what: "#{band.name} made #{to_game_currency(earnings)} from streams of #{recording.name}.", kind: 'earned')
+      band.happenings.create(what: "#{band.name} made #{as_game_currency(earnings)} from streams of #{recording.name}.", kind: 'earned')
     end
   end
 
