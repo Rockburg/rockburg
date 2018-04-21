@@ -1,4 +1,5 @@
 class Band::DailyUpdate < ApplicationService
+  include ApplicationHelper
   expects do
     required(:band).filled
   end
