@@ -269,13 +269,19 @@
               </div>
               <div class="modal-body">
                 <p>The more buzz you have when you release an album, the better your sales will be!</p>
+                <% if @band.recordings.where(release_at: nil).count > 0 %>
                 <div class="form-group">
-                  <%= collection_select(:recording, :id, @band.recordings, :id, :full_recording, class: 'form-control') %>
+                  <%= collection_select(:recording, :id, @band.recordings.where(release_at: nil), :id, :full_recording, class: 'form-control') %>
                 </div>
+                <% else %>
+                <div class="alert alert-warning" role="alert">You currently have no unreleased recordings!</div>
+                <% end %>
               </div>
+              <% if @band.recordings.where(release_at: nil).count > 0 %>
               <div class="modal-footer">
                 <%= submit_tag("Release", class: 'btn btn-primary') %>
               </div>
+              <% end %>
               <% end %>
             </div>
           </div>
