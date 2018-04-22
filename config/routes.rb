@@ -4,12 +4,17 @@ Rails.application.routes.draw do
   devise_for :managers
 
   resources :bands do
+    member do
+      get :happenings
+      get :songs
+      get :recordings
+      get :releases
+      get :tours
+    end
     resources :activities
     resources :songs
     resources :recordings
-    member do
-      get 'happenings'
-    end
+
     resources :skills do
       resources :members do
         member do
