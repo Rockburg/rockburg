@@ -1,79 +1,5 @@
 <h1><%= @band.name %> <span class="badge badge-secondary"><%= @band.genre.name %> - <%= @band.genre.style %></span></h1>
-<hr>
-<h3>Fans: <%= @band.fans %> &bull;
-  Buzz: <%= @band.buzz %> &bull;
-  Songs: <% if @band.songs.count > 0 %><a href="#" type="" class="" data-toggle="modal" data-target="#modal_songs"><%= @band.songs.count %></a><% else %>0<% end %> &bull;
-  Recordings: <% if @band.recordings.count > 0 %><a href="#" type="" class="" data-toggle="modal" data-target="#modal_recordings"><%= @band.recordings.count %></a><% else %>0<% end %></h3>
-<div class="modal fade" id="modal_songs" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="">Your songs!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Here are all the songs <%= @band.name %> has written.</p>
-        <ul>
-          <% @band.songs.each do |song| %>
-          <li>
-            <%= song.name %> (Quality: <%= song.quality %>)
-            <% if manager_signed_in? and @band.manager == current_manager %>
-            <%= link_to band_song_path(@band, song), method: :delete, data: { confirm: "Are you sure you want to delete #{song.name}?" } do %>
-              <%= fa_icon 'ban', class: 'text-danger d-inline float-right' %>
-            <% end %>
-            <% end %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal_recordings" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id=""><%= @band.name %>'s recordings!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Here are all the songs <%= @band.name %> has recorded.</p>
-        <ul>
-          <% @band.recordings.each do |recording| %>
-          <li>
-            <%= recording.name %> (<%= recording.kind %> -- Quality: <%= recording.quality %>)
-            <% if manager_signed_in? and @band.manager == current_manager %>
-            <%= link_to band_recording_path(@band, recording), method: :delete, data: { confirm: "Are you sure you want to delete #{recording.name}?" } do %>
-              <%= fa_icon 'ban', class: 'text-danger d-inline float-right' %>
-            <% end %>
-            <% end %>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<hr/>
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <%= link_to "Profile", band_path(@band), class: 'nav-link active' %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Songs <span class='badge badge-light'>#{@band.songs.count}</span>".html_safe, songs_band_path(@band), class: 'nav-link' %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Recordings <span class='badge badge-light'>#{@band.recordings.count}</span>".html_safe, recordings_band_path(@band), class: 'nav-link' %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Releases <span class='badge badge-light'>#{@band.recordings.released.count}</span>".html_safe, releases_band_path(@band), class: 'nav-link' %>
-  </li>
-</ul>
+<h3 class="">Fans: <%= @band.fans %> &bull; Buzz: <%= @band.buzz %></h3>
 <hr>
 <div class="row">
   <% if manager_signed_in? and @band.manager == current_manager %>
@@ -334,10 +260,72 @@
   </div>
   <% end %>
   <div class="col-sm-6">
-    <h3>News</h3>
-    <ol style="" class="news">
-    <%= render template: "bands/happenings" %>
-    </ol>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">News</a>
+        <a class="nav-item nav-link" id="nav-songs-tab" data-toggle="tab" href="#nav-songs" role="tab" aria-controls="nav-songs" aria-selected="false">Songs <span class='badge badge-light'><%= @band.songs.count %></span></a>
+        <a class="nav-item nav-link" id="nav-recordings-tab" data-toggle="tab" href="#nav-recordings" role="tab" aria-controls="nav-recordings" aria-selected="false">Recordings <span class='badge badge-light'><%= @band.recordings.count %></span></a>
+        <a class="nav-item nav-link" id="nav-releases-tab" data-toggle="tab" href="#nav-releases" role="tab" aria-controls="nav-releases" aria-selected="false">Releases <span class='badge badge-light'><%= @band.recordings.released.count %></span></a>
+        <a class="nav-item nav-link" id="nav-gigs-tab" data-toggle="tab" href="#nav-gigs" role="tab" aria-controls="nav-gigs" aria-selected="false">Gigs</a>
+      </div>
+    </nav>
+    <div class="tab-content p-3" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <ol style="" class="news">
+          <%= render template: "bands/happenings" %>
+        </ol>
+      </div>
+      <div class="tab-pane fade" id="nav-songs" role="tabpanel" aria-labelledby="nav-songs-tab">
+        <p>Here are all the songs <%= @band.name %> has written.</p>
+        <ul>
+          <% @band.songs.each do |song| %>
+          <li>
+            <%= song.name %> (Quality: <%= song.quality %>)
+            <% if manager_signed_in? and @band.manager == current_manager %>
+            <%= link_to band_song_path(@band, song), method: :delete, data: { confirm: "Are you sure you want to delete #{song.name}?" } do %>
+              <%= fa_icon 'ban', class: 'text-danger d-inline float-right' %>
+            <% end %>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="tab-pane fade" id="nav-recordings" role="tabpanel" aria-labelledby="nav-recordings-tab">
+        <p>Here are all the songs <%= @band.name %> has recorded.</p>
+        <ul>
+          <% @band.recordings.each do |recording| %>
+          <li>
+            <%= recording.name %> (<%= recording.kind %> -- Quality: <%= recording.quality %>)
+            <% if manager_signed_in? and @band.manager == current_manager %>
+            <%= link_to band_recording_path(@band, recording), method: :delete, data: { confirm: "Are you sure you want to delete #{recording.name}?" } do %>
+              <%= fa_icon 'ban', class: 'text-danger d-inline float-right' %>
+            <% end %>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
+        <p>Here are all the songs <%= @band.name %> has releases.</p>
+        <ul>
+          <% @band.recordings.released.each do |release| %>
+          <li>
+            <%= release.name %> (<%= release.release_at.to_date %>)
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="tab-pane fade" id="nav-gigs" role="tabpanel" aria-labelledby="nav-gigs-tab">
+        <p>Here are all the gigs <%= @band.name %> has played.</p>
+        <ul>
+          <% @band.gigs.each do |gig| %>
+          <li>
+            <%= gig.venue.name %> on <%= gig.played_on.to_date %> (Made <%= as_game_currency(gig.money_made) %> &bull; New Fans: <%= gig.fans_gained %>)
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
 
