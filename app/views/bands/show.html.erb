@@ -1,5 +1,5 @@
 <h1><%= @band.name %> <span class="badge badge-secondary"><%= @band.genre.name %> - <%= @band.genre.style %></span></h1>
-<h3 class="">Fans: <%= @band.fans %> &bull; Buzz: <%= @band.buzz %></h3>
+<h3 class="">Fans: <span class="data-fans"><%= @band.fans %></span> &bull; Buzz: <span class="data-buzz"><%= @band.buzz %></span></h3>
 <hr>
 <div class="row">
   <% if manager_signed_in? and @band.manager == current_manager %>
