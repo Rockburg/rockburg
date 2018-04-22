@@ -39,6 +39,22 @@ class BandsController < ApplicationController
     @band = Band.where(id: params[:id]).first
   end
 
+  def songs
+
+  end
+
+  def recordings
+
+  end
+
+  def releases
+    
+  end
+
+  def tour
+
+  end
+
   private
 
   def band_params

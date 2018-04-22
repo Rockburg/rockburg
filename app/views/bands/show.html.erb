@@ -1,10 +1,9 @@
-<h1><%= @band.name %></h1>
-<h2><%= @band.genre.name %> - <%= @band.genre.style %></h2>
+<h1><%= @band.name %> <span class="badge badge-secondary"><%= @band.genre.name %> - <%= @band.genre.style %></span></h1>
+<hr>
 <h3>Fans: <%= @band.fans %> &bull;
   Buzz: <%= @band.buzz %> &bull;
   Songs: <% if @band.songs.count > 0 %><a href="#" type="" class="" data-toggle="modal" data-target="#modal_songs"><%= @band.songs.count %></a><% else %>0<% end %> &bull;
   Recordings: <% if @band.recordings.count > 0 %><a href="#" type="" class="" data-toggle="modal" data-target="#modal_recordings"><%= @band.recordings.count %></a><% else %>0<% end %></h3>
-
 <div class="modal fade" id="modal_songs" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -60,8 +59,22 @@
     </div>
   </div>
 </div>
-
 <hr/>
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <%= link_to "Profile", band_path(@band), class: 'nav-link active' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Songs <span class='badge badge-light'>#{@band.songs.count}</span>".html_safe, songs_band_path(@band), class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Recordings <span class='badge badge-light'>#{@band.recordings.count}</span>".html_safe, recordings_band_path(@band), class: 'nav-link' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Releases <span class='badge badge-light'>#{@band.recordings.released.count}</span>".html_safe, releases_band_path(@band), class: 'nav-link' %>
+  </li>
+</ul>
+<hr>
 <div class="row">
   <% if manager_signed_in? and @band.manager == current_manager %>
   <div class="col-sm-6">
