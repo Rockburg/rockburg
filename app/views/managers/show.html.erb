@@ -12,7 +12,7 @@
       </div>
       <% if band.activities.current_activity.try(:last) %>
       <small class="card-footer endtimes text-center bg-warning text-white">
-        Busy for <b data-endtimes="<%= band.activities.current_activity.try(:last).ends_at %>"></b>
+        <%= band.activities.current_activity.try(:last).humanize_action %> for <b data-endtimes="<%= band.activities.current_activity.try(:last).ends_at %>"></b>
       </small>
       <% end %>
     </div>
