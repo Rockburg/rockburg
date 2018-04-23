@@ -16,17 +16,26 @@
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 $font-family-sans-serif: 'Open Sans', sans-serif;
-$headings-font-family: 'Nunito', sans-serif;
+$headings-font-family:  'Nunito', sans-serif;
+$font-family-monospace: 'Almamono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 $headings-font-weight: 700;
 $blue: #2178E6;
 $green: #13D87B;
-
+//$primary: #292F36;
 
 @import "bootstrap";
 @import "font-awesome";
 
 button {
   cursor: pointer;
+}
+
+
+.navbar {
+  font-weight: 700;
+}
+.navbar-brand img {
+  max-width: 180px;
 }
 
 .card-img-pad {

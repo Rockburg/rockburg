@@ -10,7 +10,7 @@
 
   <body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>" data-id="<%= params[:id].to_i if params[:id].present? %>">
     <header class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
-      <%= link_to "🤘 Rockburg", root_path, class: 'navbar-brand' %>
+      <%= link_to image_tag('logo-rockburg.svg', class: 'd-inline-block align-top'), root_path, class: 'navbar-brand' %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
