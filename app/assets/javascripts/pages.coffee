@@ -4,6 +4,7 @@ App.room = App.cable.subscriptions.create "ActivityNotificationsChannel",
       $('.activities').fadeIn 'fast'
       $('body[data-controller="bands"][data-action="show"][data-id="'+data['band']+'"] .data-fans').text(data['band_fans'])
       $('body[data-controller="bands"][data-action="show"][data-id="'+data['band']+'"] .data-buzz').text(data['band_buzz'])
+      $('body[data-controller="bands"][data-action="show"][data-id="'+data['band']+'"] .data-balance').text(data['balance'])
       $('.activity_success').html(data['message']).fadeIn 'fast', ->
         $(this).delay(3000).fadeOut 'slow'
         $('body[data-controller="bands"][data-action="show"][data-id="'+data['band']+'"] .news').load('/bands/'+data['band']+'/happenings')

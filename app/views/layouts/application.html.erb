@@ -28,7 +28,7 @@
           <small class="text-light">Game last reset <b><u><%= time_ago_in_words(last_reset, vague: true) %> ago</u></b></small>
         </li>
         <li class="nav-item">
-          <a href="#" role="button" class="text-light nav-link btn btn-success">Money <span class="badge badge-light"><%= as_game_currency(current_manager.balance) %></span></a>
+          <a href="#" role="button" class="text-light nav-link btn btn-success">Money <span class="badge badge-light data-balance"><%= as_game_currency(current_manager.balance) %></span></a>
         </li>
         <li class="nav-item"><%= link_to "Sign Out", destroy_manager_session_path, method: :delete, class: 'nav-link' %></li>
       </ul>
