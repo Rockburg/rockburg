@@ -17,7 +17,6 @@ RSpec.feature 'Login', :js => true do
   end
 
   scenario 'When manager logs in with wrong password' do
-    # find_link('Sign Out').click
     login_manager(create(:manager).email, 'wrong_password')
 
     expect(page).not_to have_text('Profile')

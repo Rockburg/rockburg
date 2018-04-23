@@ -36,5 +36,8 @@ module Rockburg
     # ActiveRecord time_zone
     config.active_record.default_timezone = :utc
     config.active_record.time_zone_aware_types = %i[datetime time]
+
+    config.autoload_paths << "#{Rails.root}/lib"
+    config.eager_load_paths << "#{Rails.root}/lib"
   end
 end

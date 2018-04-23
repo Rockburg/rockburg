@@ -51,6 +51,7 @@ gem 'sentry-raven' # logging
 gem 'font-awesome-rails' # icons
 gem 'figaro' # environment variables
 gem 'merit', github: 'Rockburg/merit', branch: :master # badge system
+gem 'httparty'
 
 group :development, :test do
   gem 'pry'

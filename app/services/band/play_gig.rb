@@ -21,6 +21,10 @@ class Band::PlayGig < ApplicationService
     buzz = band.buzz.to_f
     fans = band.fans.to_f
 
+    # 0 to ~5 additional buzz pending genre popularity; defaults 0
+    sentiment = ExternalSentiment.most_recent_from('lastfm')
+    buzz += sentiment.keys.reverse.index(band.genre.name) rescue 0
+
     attendance = ((((fans/cap)**rand(1.1..1.7)) * 100) + (fans * (buzz / 1000))).ceil
     attendance = attendance.zero? ? rand(1..5) : attendance
     attendance = [attendance, cap].min

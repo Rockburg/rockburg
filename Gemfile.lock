@@ -186,6 +186,8 @@ GEM
       thor (>= 0.13.6)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (1.0.0)
       concurrent-ruby (~> 1.0)
     inflecto (0.0.2)
@@ -209,6 +211,7 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     nio4r (2.3.0)
     nokogiri (1.8.2)
@@ -377,6 +380,7 @@ DEPENDENCIES
   font-awesome-rails
   foreman
   hirb!
+  httparty
   interactor
   interactor-contracts
   jquery-rails
