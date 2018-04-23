@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_23_004646) do
+ActiveRecord::Schema.define(version: 2018_04_23_163953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 2018_04_23_004646) do
     t.bigint "buzz", default: 0
     t.index ["genre_id"], name: "index_bands_on_genre_id"
     t.index ["manager_id"], name: "index_bands_on_manager_id"
+  end
+
+  create_table "external_sentiments", force: :cascade do |t|
+    t.string "source"
+    t.jsonb "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "financials", force: :cascade do |t|
