@@ -50,8 +50,9 @@ class Band::DailyUpdate < ApplicationService
   def decay_fans(band)
     # Decay fans based on external popularity of band's genre
 
-    sentiment = Lastfm.sentiment
-    impact = ((sentiment.keys.index(band.genre.name) / 3.25) / 10.0) # 0 to ~15% dynamic decay rate
+    # 0 to ~15% dynamic decay rate; defaults 0 if sentiment not found
+    sentiment = ExternalSentiment.most_recent_from('lastfm')
+    impact = ((sentiment.keys.index(band.genre.name) / 3.25) / 10.0) rescue 0
 
     decayed_fans = (band.fans * (0.95 - impact)).ceil # guarantees minimum 5% daily decay + external impact
     band.update_attributes(fans: decayed_fans)
