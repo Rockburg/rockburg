@@ -1,5 +1,5 @@
 class BandsController < ApplicationController
-  layout false, only: [:happenings]
+  layout false, only: [:happenings, :allmembers]
 
   def index
   end
@@ -39,20 +39,8 @@ class BandsController < ApplicationController
     @band = Band.where(id: params[:id]).first
   end
 
-  def songs
-
-  end
-
-  def recordings
-
-  end
-
-  def releases
-    
-  end
-
-  def tour
-
+  def allmembers
+    @band = Band.where(id: params[:id]).first
   end
 
   private

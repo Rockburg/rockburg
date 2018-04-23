@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :recordings
       get :releases
       get :tours
+      get :allmembers
     end
     resources :activities
     resources :songs

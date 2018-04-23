@@ -1,0 +1,4 @@
+<% @band.genre.skills.each do |genre_skill| %>
+  <% member = @band.members.with_skill(genre_skill).first %>
+  <%= render template: "members/show", :locals => { member: member, genre_skill: genre_skill } %>
+<% end %>

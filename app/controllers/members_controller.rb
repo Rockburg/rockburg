@@ -2,11 +2,13 @@ class MembersController < ApplicationController
   before_action :authenticate_manager!
   before_action :set_member, only: [:destroy]
   before_action :set_band, only: [:destroy]
+  layout false, only: [:show]
 
   def index
   end
 
   def show
+    @member = Member.find_by_id(params[:id])
   end
 
   def new
