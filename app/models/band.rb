@@ -22,7 +22,7 @@
 #
 
 class Band < ApplicationRecord
-  belongs_to :manager, :counter_cache => :bands_count
+  belongs_to :manager, counter_cache: :bands_count
   belongs_to :genre
   has_many :financials
   has_many :member_bands

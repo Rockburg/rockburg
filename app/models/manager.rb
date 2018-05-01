@@ -41,7 +41,7 @@ class Manager < ApplicationRecord
   scope :with_bands, -> { where('bands_count > 0') }
 
   ## -- RELATIONSHIPS
-  has_many :bands, counter_cache: true
+  has_many :bands, counter_cache: :bands_count
   has_many :financials
   has_many :members, through: :bands
 
