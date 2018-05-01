@@ -17,6 +17,8 @@
 //= require_tree .
 
 $(document).ready(function() {
+  $('.modal.bankrupt').modal({backdrop:'static',keyboard:false, show:true});
+
   $('[data-endtimes]').each(function() {
     var $this = $(this), finalDate = $(this).data('endtimes');
     $this.countdown(finalDate, function(event) {

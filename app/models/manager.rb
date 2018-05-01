@@ -78,4 +78,23 @@ class Manager < ApplicationRecord
   def avatar_url
     Manager::AvatarURL.(manager: self).result
   end
+
+  def file_bankruptcy
+    self.bands.destroy_all
+    self.financials.destroy_all
+    self.give_starting_balance
+    Manager.reset_counters(self.id, :bands)
+  end
+
+  def bankrupt?
+    self.balance <= -1000
+  end
+
+  def low_balance?
+    self.balance < 250 and self.balance > 0
+  end
+
+  def negative?
+    self.balance > -1000 and self.balance < 0
+  end
 end
