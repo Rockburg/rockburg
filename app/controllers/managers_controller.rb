@@ -17,4 +17,12 @@ class ManagersController < ApplicationController
   def edit
     @manager = current_manager
   end
+
+  def file_bankruptcy
+    if current_manager.bankrupt? and current_manager.file_bankruptcy
+      redirect_to dashboard_path, alert: "You've filed for bankruptcy. Better luck this time around!"
+    elsif
+      redirect_to dashboard_path
+    end
+  end
 end

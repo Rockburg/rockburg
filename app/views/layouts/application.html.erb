@@ -39,8 +39,24 @@
       </div>
       <% end %>
     </header>
-    <div class="container my-5">
-      <div id="messages"></div>
+    <div class="container my-5" role="main">
+      <% if current_manager.present? and current_manager.bankrupt? %>
+      <div class="modal bankrupt" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">You're Bankrupt!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Seems the music industry got the best of you. You've lost all of your money and must file for bankruptcy! <b>Doing this will reset your account with a starting balance of <%= as_game_currency(500) %>.</b></p>
+            </div>
+            <div class="modal-footer">
+              <%= link_to "File bankruptcy & start over", file_bankruptcy_manager_path(current_manager), class: 'btn btn-danger' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
       <% if notice.present? %>
       <div class="alert alert-success" role="alert"><%= notice %></div>
       <% end %>
@@ -48,6 +64,15 @@
       <% if alert.present? %>
       <div class="alert alert-warning" role="alert"><%= alert %></div>
       <% end %>
+
+      <% if current_manager.present? and current_manager.low_balance? %>
+      <div class="alert alert-warning" role="alert">Your balance (<%= as_game_currency(current_manager.balance) %>) is getting low! If you drop below zero you risk going bankrupt!</div>
+      <% end %>
+
+      <% if current_manager.present? and current_manager.negative? %>
+      <div class="alert alert-danger" role="alert">Your balance has dropped below zero! If you go below <%= as_game_currency(-1000) %> you'll go bankrupt and be forced to start over!</div>
+      <% end %>
+
       <%= yield %>
     </div>
     <footer class="bd-footer text-muted">

@@ -24,7 +24,11 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :managers
+  resources :managers do
+    member do
+      get 'file_bankruptcy'
+    end
+  end
   resources :members
   resources :skills
   resources :charts do
