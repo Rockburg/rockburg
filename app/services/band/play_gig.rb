@@ -29,7 +29,8 @@ class Band::PlayGig < ApplicationService
     attendance = attendance.zero? ? rand(1..5) : attendance
     attendance = [attendance, cap].min
 
-    new_fans = ((((attendance / cap)**rand(1..3.5)) * 100) * 0.33).ceil
+    new_fan_percent = ((attendance/cap)**rand(1..3.5)) * rand(0.2..0.45)
+    new_fans = (attendance * new_fan_percent).ceil
     new_fans = new_fans.zero? ? rand(1..4) : new_fans
     new_fans = [new_fans, cap].min
 
