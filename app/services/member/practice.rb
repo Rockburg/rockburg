@@ -14,7 +14,7 @@ class Member::Practice < ApplicationService
   end
 
   def call
-    increase_skill = (rand(1..6) * hours / 5.0).ceil
+    increase_skill = (rand(1..6) * hours / 10.0).ceil
     increase_fatigue = (rand(1..10) * hours / 5.0).ceil
 
     Member.transaction do
@@ -28,7 +28,11 @@ class Member::Practice < ApplicationService
       context.skill_change = increase_skill
       context.fatigue_change = increase_fatigue
 
-      member.skill_primary_level += increase_skill
+      if member.skill_primary_level + increase_skill > 100
+        member.skill_primary_level = 100
+      else
+        member.skill_primary_level += increase_skill
+      end
 
       member.save!
 
