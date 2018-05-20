@@ -18,7 +18,16 @@ class Activity::PlayGig < ApplicationService
     start_at = Time.current
     end_at = start_at + hours * ENV["SECONDS_PER_GAME_HOUR"].to_i
     context.activity = Activity.create!(band: band, action: :gig, starts_at: start_at, ends_at: end_at)
-    gig = band.gigs.create!(venue: venue, played_on: Date.today)
-    Band::PlayGigWorker.perform_at(end_at, band.to_global_id, gig.to_global_id, hours)
+    
+    random_event = Activity::RandomEvent.call(
+      band: band,
+      acivity: 'gig',
+      end_at: end_at
+    )
+
+    unless random_event == true
+      gig = band.gigs.create!(venue: venue, played_on: Date.today)
+      Band::PlayGigWorker.perform_at(end_at, band.to_global_id, gig.to_global_id, hours)
+    end
   end
 end
