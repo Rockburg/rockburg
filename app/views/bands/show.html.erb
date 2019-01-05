@@ -254,7 +254,7 @@
       </div>
 
       <% else %>
-        You need to hire a full band!
+        <p>You need to hire <b>at least <%= @band.genre.min_members %> members</b> to start practicing!</p>
       <% end %>
     </div>
   </div>
