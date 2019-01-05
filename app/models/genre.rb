@@ -20,7 +20,11 @@ class Genre < ApplicationRecord
 
   def full_genre
     result = "#{name} - #{style} ("
-    result << "#{pluralize(min_members, 'member')}"
+    if max_members == 1
+      result << "1 member"
+    else
+      result << "#{min_members}-#{max_members} members"
+    end
     result << ")"
     result
   end
