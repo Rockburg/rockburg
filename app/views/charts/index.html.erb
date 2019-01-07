@@ -61,6 +61,7 @@
   </thead>
   <tbody>
     <% @releases.each_with_index do |release, index| %>
+    <% if release.band.manager.present? %>
     <tr>
       <th scope="row"><%= index + 1 %></th>
       <td><%= release.name %></td>
@@ -69,6 +70,7 @@
       <td><%= link_to image_tag(release.band.manager.avatar_url, class: 'avatar rounded float-left', width: "25px") + release.band.manager.name, manager_path(release.band.manager) %><%=  %></td>
       <td><%= release.sales %></td>
     </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
