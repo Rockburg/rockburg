@@ -1,6 +1,6 @@
 class Band::RecordSingleWorker < ApplicationWorker
-  def perform(band, recording, hours = nil)
-    Band::RecordSingle.(band: band, recording: recording, hours: hours)
+  def perform(band, recording, hours = nil, activity)
+    Band::RecordSingle.(band: band, recording: recording, hours: hours, activity: activity)
     band = Band.ensure(band)
 
     ActionCable.server.broadcast "activity_notifications:#{band.manager_id}",

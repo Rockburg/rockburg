@@ -27,6 +27,6 @@ class Activity::RecordSingle < ApplicationService
     recording = band.recordings.create(studio: studio, kind: :single, name: recording_name)
     recording.songs << song
 
-    Band::RecordSingleWorker.perform_at(end_at, band.to_global_id, recording.to_global_id, hours)
+    Band::RecordSingleWorker.perform_at(end_at, band.to_global_id, recording.to_global_id, hours, context.activity.id)
   end
 end

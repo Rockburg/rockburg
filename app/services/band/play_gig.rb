@@ -5,10 +5,11 @@ class Band::PlayGig < ApplicationService
   expects do
     required(:band).filled
     required(:gig).filled
+    required(:activity).filled.value(type?: Integer)
     required(:hours).filled.value(type?: Integer)
   end
 
-  delegate :band, :gig, :hours, to: :context
+  delegate :band, :gig, :hours, :activity, to: :context
 
   before do
     context.band = Band.ensure(band)
@@ -49,8 +50,8 @@ class Band::PlayGig < ApplicationService
 
       gig.update_attributes(fans_gained: new_fans, money_made: revenue)
 
-      band.happenings.create(what: "You made §#{number_with_delimiter(revenue.to_i)} from #{pluralize(attendance.to_i, "person")} at your gig!", kind: 'earned')
-      band.happenings.create(what: "You gained #{pluralize(new_fans.to_i, "new fan")} and #{new_buzz} buzz at your gig!", kind: 'earned')
+      band.happenings.create(what: "You made §#{number_with_delimiter(revenue.to_i)} from #{pluralize(attendance.to_i, "person")} at your gig!", kind: 'earned', activity_id: activity)
+      band.happenings.create(what: "You gained #{pluralize(new_fans.to_i, "new fan")} and #{new_buzz} buzz at your gig!", kind: 'earned', activity_id: activity)
     end
   end
 end

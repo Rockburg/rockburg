@@ -4,10 +4,11 @@ class Band::RecordAlbum < ApplicationService
 
   expects do
     required(:band).filled
+    required(:activity).filled.value(type?: Integer)
     required(:album).filled
   end
 
-  delegate :band, :album, to: :context
+  delegate :band, :album, :activity, to: :context
 
   before do
     context.band = Band.ensure!(band)
@@ -52,6 +53,6 @@ class Band::RecordAlbum < ApplicationService
     Band::AddFatigue.(band: band, range: 25..75)
     Band::SpendMoney.(band: band, amount: studio.cost)
 
-    band.happenings.create(what: "#{band.name} recorded an album named #{album.name}! It has a quality score of #{album.quality} and cost #{as_game_currency(studio.cost)} to record.", kind: 'record_album')
+    band.happenings.create(what: "#{band.name} recorded an album named #{album.name}! It has a quality score of #{album.quality} and cost #{as_game_currency(studio.cost)} to record.", kind: 'record_album', activity_id: activity)
   end
 end

@@ -1,10 +1,11 @@
 class Band::WriteSong < ApplicationService
   expects do
     required(:band).filled
+    required(:activity).filled.value(type?: Integer)
     required(:hours).filled.value(type?: Integer)
   end
 
-  delegate :band, :hours, :song, to: :context
+  delegate :band, :hours, :song, :activity, to: :context
 
   before do
     context.band = Band.ensure!(band)
@@ -40,6 +41,6 @@ class Band::WriteSong < ApplicationService
     song_quality = (total - ego_reduction).round
 
     context.song = band.songs.create!(name: Generator.song_title, quality: song_quality)
-    band.happenings.create(what: "#{band.name} wrote a new song called #{song.name}! It has a quality score of #{song.quality}.", kind: 'wrote_song')
+    band.happenings.create(what: "#{band.name} wrote a new song called #{song.name}! It has a quality score of #{song.quality}.", kind: 'wrote_song', activity_id: activity)
   end
 end

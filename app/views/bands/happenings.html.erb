@@ -1,3 +1,9 @@
-<% @band.happenings.recent.limit(20).each do |happening| %>
-  <li class="<%= happening.kind %>"><%= happening.what %> <small><%= time_ago_in_words(happening.created_at, vague: true) %> ago</small></li>
+<% @band.happenings.recent.group(:activity_id, :id).distinct.where.not(activity_id: nil).each do |activity| %>
+  <li>
+    <strong class="activity"><%= activity.activity.humanize_past_action %> <small><%= time_ago_in_words(activity.activity.created_at, vague: true) %> ago</small></strong>
+    <ul>
+      <% activity.activity.happenings.each do |happening| %>
+      <li class="<%= happening.kind %>"><%= happening.what %></li>
+      <% end %>
+    </ul>
 <% end %>

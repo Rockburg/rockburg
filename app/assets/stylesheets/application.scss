@@ -65,15 +65,28 @@ button {
   max-height:510px;
   overflow:auto;
   list-style-type: none;
+  ul {
+    margin: 0;
+    padding: 0;
+    max-height:510px;
+    overflow:auto;
+    list-style-type: none;
+  }
   li {
-    margin:0;
-    padding:0 0 0 15px;
-    position: relative;
-    font-size: 95%;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $gray-100;
     small {
       color: $gray-600;
       margin-left: 5px;
     }
+  }
+  li li {
+    margin:0;
+    padding:0 0 0 15px;
+    position: relative;
+    font-size: 95%;
+    border: 0;
     &:before {
       content: '';
       width: 5px;

@@ -30,6 +30,6 @@ class Activity::RecordAlbum < ApplicationService
       album.singles << recording
     end
 
-    Band::RecordAlbumWorker.perform_at(end_at, band.to_global_id, album.to_global_id)
+    Band::RecordAlbumWorker.perform_at(end_at, band.to_global_id, album.to_global_id, context.activity.id)
   end
 end

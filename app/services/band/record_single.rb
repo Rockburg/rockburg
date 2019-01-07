@@ -5,10 +5,11 @@ class Band::RecordSingle < ApplicationService
   expects do
     required(:band).filled
     required(:recording).filled
+    required(:activity).filled.value(type?: Integer)
     optional(:hours) # Hours is not used, apparently
   end
 
-  delegate :band, :recording, :hours, to: :context
+  delegate :band, :recording, :hours, :activity, to: :context
 
   before do
     context.band = Band.ensure!(band)
@@ -55,6 +56,6 @@ class Band::RecordSingle < ApplicationService
     Band::SpendMoney.(band: band, amount: studio.cost)
 
     song_names = recording.songs.map(&:name).join(',')
-    band.happenings.create(what: "#{band.name} made a recording of #{song_names}! It has a quality score of #{recording_quality} and cost #{as_game_currency(studio.cost)} to record.", kind: 'record_single')
+    band.happenings.create(what: "#{band.name} made a recording of #{song_names}! It has a quality score of #{recording_quality} and cost #{as_game_currency(studio.cost)} to record.", kind: 'record_single', activity_id: activity)
   end
 end

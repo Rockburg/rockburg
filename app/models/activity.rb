@@ -18,6 +18,7 @@
 class Activity < ApplicationRecord
   belongs_to :band
   belongs_to :financial, optional: true
+  has_many :happenings
 
   def self.current_activity
     where('ends_at > ?', Time.now)
@@ -33,7 +34,21 @@ class Activity < ApplicationRecord
     'rest' => 'Resting'
   }.freeze
 
+  PAST_ACTIVITIES = {
+    'practice' => 'Practiced',
+    'write_song' => 'Wrote a song',
+    'gig'=> 'Played a gig',
+    'record_single' => 'Recorded a single',
+    'record_album' => 'Recorded an album',
+    'release' => 'Released music',
+    'rest' => 'Rested'
+  }.freeze
+
   def humanize_action
     ACTIVITIES[action]
+  end
+
+  def humanize_past_action
+    PAST_ACTIVITIES[action]
   end
 end

@@ -1,6 +1,6 @@
 class Band::PracticeWorker < ApplicationWorker
-  def perform(band, hours)
-    Band::Practice.(band: band, hours: hours)
+  def perform(band, hours, activity)
+    Band::Practice.(band: band, hours: hours, activity: activity)
     band = Band.ensure(band)
 
     ActionCable.server.broadcast "activity_notifications:#{band.manager_id}",

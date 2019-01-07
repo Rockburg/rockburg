@@ -1,8 +1,8 @@
 class Band::PlayGigWorker < ApplicationWorker
   include ApplicationHelper
   
-  def perform(band, gig, hours)
-    Band::PlayGig.(band: band, gig: gig, hours: hours)
+  def perform(band, gig, hours, activity)
+    Band::PlayGig.(band: band, gig: gig, hours: hours, activity: activity)
 
     band = Band.ensure(band)
 

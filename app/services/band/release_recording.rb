@@ -4,10 +4,11 @@ class Band::ReleaseRecording < ApplicationService
 
   expects do
     required(:band).filled
+    required(:activity).filled.value(type?: Integer)
     required(:recording).filled
   end
 
-  delegate :band, :recording, to: :context
+  delegate :band, :recording, :activity, to: :context
 
   before do
     context.band = Band.ensure!(band)
@@ -23,7 +24,7 @@ class Band::ReleaseRecording < ApplicationService
 
       Band::EarnMoney.(band: band, amount: recording.sales)
 
-      band.happenings.create(what: "You made #{as_game_currency(recording.sales)} from your release of #{recording.name}!", kind: 'release_earned')
+      band.happenings.create(what: "You made #{as_game_currency(recording.sales)} from your release of #{recording.name}!", kind: 'release_earned', activity_id: activity)
     end
   end
 end

@@ -15,6 +15,6 @@ class Activity::WriteSong < ApplicationService
     start_at = Time.current
     end_at = start_at + hours.to_i * ENV["SECONDS_PER_GAME_HOUR"].to_i
     context.activity = Activity.create!(band: band, action: :write_song, starts_at: start_at, ends_at: end_at)
-    Band::WriteSongWorker.perform_at(end_at, band.to_global_id, hours)
+    Band::WriteSongWorker.perform_at(end_at, band.to_global_id, hours, context.activity.id)
   end
 end
