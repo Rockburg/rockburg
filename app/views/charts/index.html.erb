@@ -39,7 +39,7 @@
       <th scope="row"><%= index + 1 %></th>
       <td><%= link_to band.name, band_path(band) %></td>
       <td><%= band.genre.name %></td>
-      <td><%= link_to image_tag(band.manager.avatar_url, class: 'avatar rounded float-left', width: "25px") + band.manager.name, manager_path(band.manager) %></td>
+      <td><%= link_to image_tag(band.manager.avatar_url, class: 'avatar rounded float-left', width: "25px") + band.manager.name, manager_path(band.manager) if band.manager.present? %></td>
       <td><%= band.buzz %></td>
     </tr>
     <% end %>
