@@ -8,7 +8,7 @@ class BandPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && record.manager_id == user.id
+    create?
   end
 
   def happenings?
@@ -20,7 +20,7 @@ class BandPolicy < ApplicationPolicy
   end
 
   def hire_member?
-    true
+    update?
   end
 
   class Scope < Scope
