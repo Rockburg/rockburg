@@ -8,6 +8,7 @@ require_relative '../lib/lastfm.rb'
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'sidekiq/testing'
 require 'capybara/rspec'

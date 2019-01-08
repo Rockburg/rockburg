@@ -5,12 +5,14 @@ class BandsController < ApplicationController
   end
 
   def new
-    @band = Band.new
+    @band = Band.new(manager: current_manager)
+    authorize(@band)
   end
 
   def create
     @band = Band.new(band_params)
     @band.manager = current_manager
+    authorize(@band)
     if @band.save
       @band.happenings.create(what: "#{@band.name} has just been formed!", kind: 'new')
       redirect_to @band, alert: "Band created successfully."
@@ -26,7 +28,8 @@ class BandsController < ApplicationController
   end
 
   def show
-    @band = Band.where(id: params[:id]).first
+    @band = policy_scope(Band).where(id: params[:id]).first
+    authorize(@band)
     if !@band
       redirect_to dashboard_path
       return
@@ -35,12 +38,11 @@ class BandsController < ApplicationController
   end
 
   def happenings
-
-    @band = Band.where(id: params[:id]).first
+    @band = policy_scope(Band).find_by(id: params[:id])
   end
 
   def allmembers
-    @band = Band.where(id: params[:id]).first
+    @band = policy_scope(Band).find_by(id: params[:id])
   end
 
   private
