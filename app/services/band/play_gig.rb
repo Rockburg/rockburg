@@ -42,7 +42,7 @@ class Band::PlayGig < ApplicationService
     revenue = attendance * ticket_price
 
     band.transaction do
-      Band::AddFatigue.(band: band, range: 5..15)
+      Band::AddFatigue.(band: band, range: 5..15, activity: activity)
 
       band.increment!(:fans, new_fans.to_i)
       band.increment!(:buzz, new_buzz.to_i)

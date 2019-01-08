@@ -52,7 +52,7 @@ class Band::RecordSingle < ApplicationService
 
     recording.update(quality: recording_quality)
 
-    Band::AddFatigue.(band: band, range: 10..25)
+    Band::AddFatigue.(band: band, range: 10..25, activity: activity)
     Band::SpendMoney.(band: band, amount: studio.cost)
 
     song_names = recording.songs.map(&:name).join(',')

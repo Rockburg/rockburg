@@ -2,9 +2,10 @@ class Band::AddFatigue < ApplicationService
   expects do
     required(:band).filled
     required(:range).filled
+    required(:activity).filled.value(type?: Integer)
   end
 
-  delegate :band, :range, to: :context
+  delegate :band, :range, :activity, to: :context
 
   before do
     context.band = Band.ensure(band)
@@ -24,7 +25,7 @@ class Band::AddFatigue < ApplicationService
 
       member.save
 
-      band.happenings.create(what: "#{member.name}'s fatigue #{increased_by}", kind: 'fatigue_increase')
+      band.happenings.create(what: "#{member.name}'s fatigue #{increased_by}", kind: 'fatigue_increase', activity_id: activity)
     end
   end
 end
