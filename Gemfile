@@ -67,6 +67,7 @@ end
 
 group :test do
   gem 'rspec-sidekiq'
+  gem 'pundit-matchers'
 end
 
 group :development do
