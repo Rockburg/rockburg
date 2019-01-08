@@ -32,7 +32,12 @@ class Activity < ApplicationRecord
     'record_album' => 'Recording an album',
     'release' => 'Releasing music',
     'rest' => 'Resting',
-    'daily_update' => 'Daily Update'
+    'daily_update' => 'Daily Update',
+    'hired' => 'Hired a member',
+    'song_deleted' => 'Deleted a song',
+    'recording_deleted' => 'Deleted a recording',
+    'fired' => 'Fired a member',
+    'formed' => 'Formed the band'
   }.freeze
 
   PAST_ACTIVITIES = {
@@ -43,7 +48,12 @@ class Activity < ApplicationRecord
     'record_album' => 'Recorded an album',
     'release' => 'Released music',
     'rest' => 'Rested',
-    'daily_update' => 'Daily Update'
+    'daily_update' => 'Daily Update',
+    'hired' => 'Hired a member',
+    'song_deleted' => 'Deleted a song',
+    'recording_deleted' => 'Deleted a recording',
+    'fired' => 'Fired a member',
+    'formed' => 'Formed the band'
   }.freeze
 
   def humanize_action

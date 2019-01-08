@@ -12,7 +12,10 @@ class BandsController < ApplicationController
     @band = Band.new(band_params)
     @band.manager = current_manager
     if @band.save
-      @band.happenings.create(what: "#{@band.name} has just been formed!", kind: 'new')
+
+      activity = Activity.create!(band: @band, action: :formed, starts_at: Time.now, ends_at: Time.now)
+
+      @band.happenings.create(what: "#{@band.name} has just been formed!", kind: 'new', activity_id: activity.id)
       redirect_to @band, alert: "Band created successfully."
     else
       redirect_to new_band_path, alert: "Error creating band."
