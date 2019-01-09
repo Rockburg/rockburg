@@ -6,18 +6,21 @@ class ActivitiesController < ApplicationController
     case params[:type]
     when 'practice'
       context = Activity::Practice.call(
+        user: current_user,
         band: params[:band_id],
         hours: params[:hours]
       )
 
     when 'write_song'
       context = Activity::WriteSong.call(
+        user: current_user,
         band: params[:band_id],
         hours: params[:hours]
       )
 
     when 'gig'
       context = Activity::PlayGig.call(
+        user: current_user,
         band: params[:band_id],
         venue: params[:venue],
         hours: params[:hours] || 2
@@ -25,6 +28,7 @@ class ActivitiesController < ApplicationController
 
     when 'record_single'
       context = Activity::RecordSingle.call(
+        user: current_user,
         band: params[:band_id],
         studio: params[:studio][:studio_id],
         song: params[:song_id],
@@ -33,6 +37,7 @@ class ActivitiesController < ApplicationController
 
     when 'record_album'
       context = Activity::RecordAlbum.call(
+        user: current_user,
         band: params[:band_id],
         studio: params[:studio][:studio_id],
         recording_ids: params[:recording_ids]
@@ -40,6 +45,7 @@ class ActivitiesController < ApplicationController
 
     when 'release'
       context = Activity::ReleaseRecording.call(
+        user: current_user,
         band: params[:band_id],
         recording: params[:recording][:id],
         hours: 1
@@ -47,6 +53,7 @@ class ActivitiesController < ApplicationController
 
     when 'rest'
       context = Activity::Rest.call(
+        user: current_user,
         band: params[:band_id],
         hours: params[:hours]
       )
@@ -54,8 +61,15 @@ class ActivitiesController < ApplicationController
       raise ArgumentError.new("Unknown Type[#{params[:type]}]")
     end
 
-    if context && context.activity.save
-      redirect_to band_path(band)
+    if context && context.success?
+      authorize(context.activity, "#{params[:type]}?")
+
+      if context.activity.save
+        redirect_to band_path(band)
+        return
+      end
     end
+
+    head :unprocessable
   end
 end
