@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_214352) do
+ActiveRecord::Schema.define(version: 2019_01_10_223738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,27 +243,11 @@ ActiveRecord::Schema.define(version: 2019_01_10_214352) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "single_albums", force: :cascade do |t|
-    t.integer "album_id"
-    t.integer "single_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "skills", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "verb", default: "play"
-  end
-
-  create_table "song_recordings", force: :cascade do |t|
-    t.bigint "recording_id"
-    t.bigint "song_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recording_id"], name: "index_song_recordings_on_recording_id"
-    t.index ["song_id"], name: "index_song_recordings_on_song_id"
   end
 
   create_table "songs", force: :cascade do |t|
