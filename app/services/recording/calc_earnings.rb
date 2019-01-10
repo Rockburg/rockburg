@@ -24,7 +24,7 @@ class Recording::CalcEarnings < ApplicationService
       (band.fans * (days_since_release * release_fan_decay_rate))
 
     context.earnings = (streams * ::STREAMING_RATE)
-    context.stream = streams
+    context.streams = streams
   end
 
 end
