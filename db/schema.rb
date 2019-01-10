@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_10_200617) do
+ActiveRecord::Schema.define(version: 2019_01_10_214352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(version: 2019_01_10_200617) do
     t.bigint "num_streams"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "for_date"
     t.index ["band_id"], name: "index_streams_on_band_id"
     t.index ["release_id"], name: "index_streams_on_release_id"
   end

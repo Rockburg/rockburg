@@ -14,6 +14,7 @@ namespace :game do
     SongRecording.delete_all
     Song.delete_all
     SingleAlbum.delete_all
+    Release.delete_all
 
     puts "  Setting Starting Balance on Existing Managers and reset count".yellow
     Manager.find_each do |manager|

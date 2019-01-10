@@ -3,6 +3,7 @@
 # Table name: streams
 #
 #  id          :bigint(8)        not null, primary key
+#  for_date    :date
 #  num_streams :bigint(8)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
