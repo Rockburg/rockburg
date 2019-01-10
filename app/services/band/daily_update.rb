@@ -41,7 +41,7 @@ class Band::DailyUpdate < ApplicationService
       context.earnings = earnings
       #recording.increment!(:sales, earnings)
 
-      release.streams.find_or_create_by(for_date: DateTime.now.to_date) do |stream|
+      release.streams.find_or_create_by(for_date: DateTime.now.to_date, band: band) do |stream|
         stream.num_streams = streams
       end
 
