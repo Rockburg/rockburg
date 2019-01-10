@@ -1,24 +1,23 @@
 # == Schema Information
 #
-# Table name: songs
+# Table name: releases
 #
 #  id         :bigint(8)        not null, primary key
+#  kind       :string
 #  name       :string
-#  quality    :integer          default(0)
-#  status     :string           default("writing")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  band_id    :bigint(8)
 #
 # Indexes
 #
-#  index_songs_on_band_id  (band_id)
+#  index_releases_on_band_id  (band_id)
 #
 
 FactoryBot.define do
-  factory :song do
-    band
-    name      { Faker::FunnyName.name }
-    quality   { rand(40..100) }
+  factory :release do
+    band { "" }
+    name { "" }
+    kind { "MyString" }
   end
 end

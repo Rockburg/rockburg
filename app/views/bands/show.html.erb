@@ -39,31 +39,6 @@
           </div>
         </div>
 
-        <!-- Write song -->
-        <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_write_song"<% if @band.overly_fatigued_members? %> disabled<% end %>>Write a song<% if @band.overly_fatigued_members? %> <b class="badge badge-info">Your members are too fatigued!</b> <% end %> <br /><small>You need songs to play gigs and start growing your fan base!</small></button>
-
-        <div class="modal fade" id="modal_write_song" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="">How long would you like to work on your song?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>The longer you spend on your song, the higher quality it will be.</p>
-                <div class="list-group">
-                  <%= link_to "2 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '2'), class: 'list-group-item list-group-item-action' %>
-                  <%= link_to "10 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '10'), class: 'list-group-item list-group-item-action' %>
-                  <%= link_to "30 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '30'), class: 'list-group-item list-group-item-action' %>
-                  <%= link_to "60 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '60'), class: 'list-group-item list-group-item-action' %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Play gig -->
         <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_play_gig"<% if @band.overly_fatigued_members? or @band.songs.count <= 0 %> disabled<% end %>>Play a gig<% if @band.overly_fatigued_members? %> <b class="badge badge-info">Your members are too fatigued!</b> <% end %><% if @band.songs.count <= 0 %> <b class="badge badge-info">You need to write a song first!</b> <% end %> <br /><small>Gigs help you gain fans and make some money.</small></button>
 
@@ -99,7 +74,32 @@
           </div>
         </div>
 
-        <!-- Record a single -->
+        <!-- Write song -->
+        <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_write_song"<% if @band.overly_fatigued_members? %> disabled<% end %>>Write a song<% if @band.overly_fatigued_members? %> <b class="badge badge-info">Your members are too fatigued!</b> <% end %> <br /><small>You need songs to play gigs and start growing your fan base!</small></button>
+
+        <div class="modal fade" id="modal_write_song" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="">How long would you like to work on your song?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>The longer you spend on your song, the higher quality it will be.</p>
+                <div class="list-group">
+                  <%= link_to "2 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '2'), class: 'list-group-item list-group-item-action' %>
+                  <%= link_to "10 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '10'), class: 'list-group-item list-group-item-action' %>
+                  <%= link_to "30 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '30'), class: 'list-group-item list-group-item-action' %>
+                  <%= link_to "60 minutes", new_band_activity_path(band_id: @band.id, type: 'write_song', hours: '60'), class: 'list-group-item list-group-item-action' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Record a song -->
         <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_record_single"<% if @band.songs.count.zero? or @band.overly_fatigued_members? %> disabled<% end %>>Record a song<% if @band.songs.count.zero? %> <b class="badge badge-info">You need to write a song first!</b> <% end %><% if @band.overly_fatigued_members? %> <b class="badge badge-info">Your members are too fatigued!</b> <% end %><br /><small>Recording a song gets it ready to release!</small></button>
 
         <div class="modal fade" id="modal_record_single" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -144,53 +144,6 @@
             </div>
           </div>
         </div>
-
-        <!-- 
-          Record an album -->
-        <button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#modal_record_album"<% if @band.songs.count.zero? or @band.overly_fatigued_members? %> disabled<% end %>>Record an album<% if @band.songs.count.zero? %> <b class="badge badge-info">You need to write a song first!</b> <% end %><% if @band.overly_fatigued_members? %> <b class="badge badge-info">Your members are too fatigued!</b> <% end %> <br /><small>Put recorded singles in to an EP or LP!</small></button>
-
-        <div class="modal fade" id="modal_record_album" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <%= form_tag("/bands/#{@band.id}/activities/new", method: "get") do %>
-              <%= hidden_field_tag 'type', 'record_album' %>
-              <div class="modal-header">
-                <h5 class="modal-title">What studio would you like to record at?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="container-fluid">
-                  <h6>Select recorded songs to put on album</h6>
-                  <div class="form-group">
-                    <% @band.recordings.where(kind:'single').each do |recording| %>
-                    <div class="form-check">
-                      <%= check_box_tag('recording_ids[]  ', recording.id, false, class: '') %>
-                      <label class="form-check-label">
-                        <%= recording.name %> (Quality: <%= recording.quality %>)
-                      </label>
-                    </div>
-                    <% end %>
-                  </ul>
-                  </div>
-                  <div class="form-group">
-                    <h6>Select a studio to record at</h6>
-                    <%= collection_select(:studio, :studio_id, Studio.all, :id, :full_studio, class: 'form-control') %>
-                  </div>
-                  <div class="form-group">
-                    <h6>What would you like to name this album?</h6>
-                    <%= text_field_tag('studio[name]', Generator.album_name, class: 'form-control') %>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <%= submit_tag("Start Recording Album", class: 'btn btn-primary') %>
-              </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
         
 
         <!-- Release -->
@@ -209,14 +162,14 @@
               </div>
               <div class="modal-body">
                 <p>The more buzz you have when you release an album, the better your sales will be!</p>
-                <% if @band.recordings.where(release_at: nil).count > 0 %>
+                <% if @band.recordings.count > 0 %>
                 <h6>Select songs to include in the release</h6>
                 <div class="form-group">
-                <% @band.recordings.each do |song| %>
+                <% @band.recordings.each do |recording| %>
                 <div class="form-check">
-                  <%= check_box_tag(:recording_id, song.id, false, class: '') %>
+                  <%= check_box_tag('recording_ids[]', recording.id, false, class: '') %>
                   <label class="form-check-label">
-                    <%= song.name %> (Quality: <%= song.quality %>)
+                    <%= recording.song.name %> (Quality: <%= recording.song.quality %>)
                   </label>
                 </div>
                 <% end %>
@@ -224,17 +177,19 @@
 
                 <div class="form-group">
                   <h6>What would you like to name this release?</h6>
-                  <%= text_field_tag('studio[name]', '', class: 'form-control') %>
+                  <%= text_field_tag('release[name]', '', class: 'form-control') %>
                 </div>
 
                 <div class="form-group">
-                  <%#= collection_select(:recording, :id, @band.recordings.where(release_at: nil), :id, :full_recording, class: 'form-control') %>
+                  <%#= collection_select(:release, :kind, @band.recordings.where(release_at: nil), :id, :full_recording, class: 'form-control') %>
+                  <h6>What type of release is this?</h6>
+                  <%= select(:release, :kind, [['Single', 'single'], ['EP', 'ep'], ['LP', 'lp']]) %>
                 </div>
                 <% else %>
                 <div class="alert alert-warning" role="alert">You currently have no unreleased recordings!</div>
                 <% end %>
               </div>
-              <% if @band.recordings.where(release_at: nil).count > 0 %>
+              <% if @band.recordings.count > 0 %>
               <div class="modal-footer">
                 <%= submit_tag("Release", class: 'btn btn-primary') %>
               </div>
@@ -283,7 +238,7 @@
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">News</a>
         <a class="nav-item nav-link" id="nav-songs-tab" data-toggle="tab" href="#nav-songs" role="tab" aria-controls="nav-songs" aria-selected="false">Songs <span class='badge badge-light'><%= @band.songs.count %></span></a>
         <a class="nav-item nav-link" id="nav-recordings-tab" data-toggle="tab" href="#nav-recordings" role="tab" aria-controls="nav-recordings" aria-selected="false">Recordings <span class='badge badge-light'><%= @band.recordings.count %></span></a>
-        <a class="nav-item nav-link" id="nav-releases-tab" data-toggle="tab" href="#nav-releases" role="tab" aria-controls="nav-releases" aria-selected="false">Releases <span class='badge badge-light'><%= @band.recordings.released.count %></span></a>
+        <a class="nav-item nav-link" id="nav-releases-tab" data-toggle="tab" href="#nav-releases" role="tab" aria-controls="nav-releases" aria-selected="false">Releases <span class='badge badge-light'><%= @band.releases.count %></span></a>
         <a class="nav-item nav-link" id="nav-gigs-tab" data-toggle="tab" href="#nav-gigs" role="tab" aria-controls="nav-gigs" aria-selected="false">Gigs</a>
       </div>
     </nav>
@@ -313,9 +268,9 @@
         <ul>
           <% @band.recordings.each do |recording| %>
           <li>
-            <%= recording.name %> (<%= recording.kind %> -- Quality: <%= recording.quality %>)
+            <%= recording.song.name %> (<%= recording.studio.name %> &bull; Quality: <%= recording.quality %>)
             <% if manager_signed_in? and @band.manager == current_manager %>
-            <%= link_to band_recording_path(@band, recording), method: :delete, data: { confirm: "Are you sure you want to delete #{recording.name}?" } do %>
+            <%= link_to band_recording_path(@band, recording), method: :delete, data: { confirm: "Are you sure you want to delete #{recording.song.name}?" } do %>
               <%= fa_icon 'ban', class: 'text-danger d-inline float-right' %>
             <% end %>
             <% end %>
@@ -326,9 +281,9 @@
       <div class="tab-pane fade" id="nav-releases" role="tabpanel" aria-labelledby="nav-releases-tab">
         <p>Here are all the songs <%= @band.name %> has releases.</p>
         <ul>
-          <% @band.recordings.released.each do |release| %>
+          <% @band.releases.each do |release| %>
           <li>
-            <%= release.name %> (<%= release.release_at.to_date %>)
+            <%= release.name %> (<%= release.kind %> &bull; <%= release.created_at.to_date %>)
           </li>
           <% end %>
         </ul>

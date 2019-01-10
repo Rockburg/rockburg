@@ -1,21 +1,21 @@
 # == Schema Information
 #
-# Table name: songs
+# Table name: releases
 #
 #  id         :bigint(8)        not null, primary key
+#  kind       :string
 #  name       :string
-#  quality    :integer          default(0)
-#  status     :string           default("writing")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  band_id    :bigint(8)
 #
 # Indexes
 #
-#  index_songs_on_band_id  (band_id)
+#  index_releases_on_band_id  (band_id)
 #
 
-class Song < ApplicationRecord
+class Release < ApplicationRecord
   belongs_to :band
-  has_many :recordings
+  has_many :streams
+  has_and_belongs_to_many :recordings
 end

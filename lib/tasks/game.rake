@@ -8,7 +8,7 @@ namespace :game do
     MemberBand.delete_all
     Band.delete_all
     Financial.delete_all
-    Activity.delete_all
+    Activity.destroy_all
     Gig.delete_all
     Recording.delete_all
     SongRecording.delete_all

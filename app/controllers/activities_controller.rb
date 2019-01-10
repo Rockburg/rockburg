@@ -27,21 +27,22 @@ class ActivitiesController < ApplicationController
       context = Activity::RecordSingle.call(
         band: params[:band_id],
         studio: params[:studio][:studio_id],
-        song: params[:song_id],
-        song_name: params[:studio][:song_name]
+        song: params[:song_id]
       )
 
-    when 'record_album'
-      context = Activity::RecordAlbum.call(
-        band: params[:band_id],
-        studio: params[:studio][:studio_id],
-        recording_ids: params[:recording_ids]
-      )
+    # when 'record_album'
+    #   context = Activity::RecordAlbum.call(
+    #     band: params[:band_id],
+    #     studio: params[:studio][:studio_id],
+    #     recording_ids: params[:recording_ids]
+    #   )
 
     when 'release'
       context = Activity::ReleaseRecording.call(
         band: params[:band_id],
-        recording: params[:recording][:id],
+        release_name: params[:release][:name],
+        release_kind: params[:release][:kind],
+        recording_ids: params[:recording_ids],
         hours: 1
       )
 
