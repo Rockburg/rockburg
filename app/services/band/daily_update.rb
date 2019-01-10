@@ -33,12 +33,19 @@ class Band::DailyUpdate < ApplicationService
 
   def calc_release_earnings(band, activity_id)
     # Release earnings
-    band.recordings.released.each do |recording|
-      earnings = Recording::CalcEarnings.(recording: recording).earnings
+    band.releases.each do |release|
+      calced = Recording::CalcEarnings.(release: release)
+      earnings = calced.earnings
+      streams = calced.streams
 
       context.earnings = earnings
-      recording.increment!(:sales, earnings)
-      band.happenings.create(what: "#{band.name} made #{as_game_currency(earnings)} from streams of #{recording.name}.", kind: 'earned', activity_id: activity_id)
+      #recording.increment!(:sales, earnings)
+
+      release.streams.find_or_create_by(for_date: DateTime.now.to_date) do |stream|
+        stream.num_streams = streams
+      end
+
+      band.happenings.create(what: "#{band.name} made #{as_game_currency(earnings)} from #{streams} streams of #{release.name}.", kind: 'earned', activity_id: activity_id)
     end
   end
 

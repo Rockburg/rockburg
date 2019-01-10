@@ -18,7 +18,7 @@
 class Activity < ApplicationRecord
   belongs_to :band
   belongs_to :financial, optional: true
-  has_many :happenings
+  has_many :happenings, dependent: :destroy
 
   def self.current_activity
     where('ends_at > ?', Time.now)
@@ -28,7 +28,7 @@ class Activity < ApplicationRecord
     'practice' => 'Practicing',
     'write_song' => 'Writing a song',
     'gig'=> 'Playing a gig',
-    'record_single' => 'Recording a single',
+    'record_single' => 'Recording a song',
     'record_album' => 'Recording an album',
     'release' => 'Releasing music',
     'rest' => 'Resting',
@@ -44,7 +44,7 @@ class Activity < ApplicationRecord
     'practice' => 'Practiced',
     'write_song' => 'Wrote a song',
     'gig'=> 'Played a gig',
-    'record_single' => 'Recorded a single',
+    'record_single' => 'Recorded a song',
     'record_album' => 'Recorded an album',
     'release' => 'Released music',
     'rest' => 'Rested',

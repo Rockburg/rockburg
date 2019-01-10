@@ -32,6 +32,8 @@ class Band < ApplicationRecord
   has_many :songs
   has_many :gigs
   has_many :recordings
+  has_many :releases
+  has_many :streams
 
   def to_param
     [id, name.parameterize].join("-")
