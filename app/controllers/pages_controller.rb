@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def index
-    #code
+    skip_policy_scope
+    # code
   end
 end
