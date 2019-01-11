@@ -19,7 +19,7 @@ class Band::RecordSingle < ApplicationService
 
   def call
     studio = recording.studio
-    song_avg = recording.songs.average(:quality).to_i
+    song_quality = recording.song.quality.to_i
 
     song_mp = 40
     studio_mp = 30
@@ -42,7 +42,7 @@ class Band::RecordSingle < ApplicationService
     points = (total_skills * skill_mp) +
       (total_creativity * creativity_mp) +
       (studio.weight * studio_mp) +
-      (song_avg * song_mp)
+      (song_quality * song_mp)
 
     ego_weight = (total_ego * ego_mp).to_f / possible_points.to_f
     total = quality * (points.to_f / possible_points.to_f)
@@ -52,10 +52,9 @@ class Band::RecordSingle < ApplicationService
 
     recording.update(quality: recording_quality)
 
-    Band::AddFatigue.(band: band, range: 10..25)
+    Band::AddFatigue.(band: band, range: 10..25, activity: activity)
     Band::SpendMoney.(band: band, amount: studio.cost)
 
-    song_names = recording.songs.map(&:name).join(',')
-    band.happenings.create(what: "#{band.name} made a recording of #{song_names}! It has a quality score of #{recording_quality} and cost #{as_game_currency(studio.cost)} to record.", kind: 'record_single', activity_id: activity)
+    band.happenings.create(what: "#{band.name} made a recording of #{recording.song.name}! It has a quality score of #{recording_quality} and cost #{as_game_currency(studio.cost)} to record.", kind: 'record_single', activity_id: activity)
   end
 end

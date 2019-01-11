@@ -8,7 +8,10 @@ class SongsController < ApplicationController
 
   def destroy
     if @song.destroy
-      @band.happenings.create(what: "#{@song.name} was thrown in the trash!", kind: 'trash')
+
+      activity = Activity.create!(band: @band, action: :song_deleted, starts_at: Time.now, ends_at: Time.now)
+
+      @band.happenings.create(what: "#{@song.name} was thrown in the trash!", kind: 'trash', activity_id: activity.id)
       redirect_to band_path(@band), alert: "#{@song.name} was deleted."
     else
       redirect_to root_path, alert: 'Something went wrong.'

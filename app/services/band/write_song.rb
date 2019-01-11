@@ -14,7 +14,7 @@ class Band::WriteSong < ApplicationService
   end
 
   def call
-    Band::AddFatigue.(band: band, range: (2*hours)..(5*hours))
+    Band::AddFatigue.(band: band, range: (2*hours)..(5*hours), activity: activity)
 
     skill_mp = 50
     creativity_mp = 15

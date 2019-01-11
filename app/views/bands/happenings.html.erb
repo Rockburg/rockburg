@@ -1,9 +1,10 @@
-<% @band.happenings.recent.group(:activity_id, :id).distinct.where.not(activity_id: nil).each do |activity| %>
-  <li>
-    <strong class="activity"><%= activity.activity.humanize_past_action %> <small><%= time_ago_in_words(activity.activity.created_at, vague: true) %> ago</small></strong>
-    <ul>
-      <% activity.activity.happenings.each do |happening| %>
-      <li class="<%= happening.kind %>"><%= happening.what %></li>
-      <% end %>
-    </ul>
+<% @band.activities.where('ends_at < ?', Time.now).limit(20).order('ends_at desc').each do |activity| %>
+<li>
+  <strong class="activity"><%= activity.humanize_past_action %> <small><%= time_ago_in_words(activity.created_at, vague: true) %> ago</small></strong>
+  <ul>
+    <% activity.happenings.each do |happening| %>
+    <li class="<%= happening.kind %>"><%= happening.what %></li>
+    <% end %>
+  </ul>
+</li>
 <% end %>

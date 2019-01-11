@@ -29,7 +29,10 @@ class MembersController < ApplicationController
 
   def destroy
     if @member.destroy
-      @band.happenings.create(what: "#{@member.name} was fired!", kind: 'fired')
+      
+      activity = Activity.create!(band: @band, action: :fired, starts_at: Time.now, ends_at: Time.now)
+
+      @band.happenings.create(what: "#{@member.name} was fired!", kind: 'fired', activity_id: activity.id)
       redirect_to band_path(@band), alert: "#{@member.name} was fired."
     else
       redirect_to root_path, alert: 'Something went wrong.'

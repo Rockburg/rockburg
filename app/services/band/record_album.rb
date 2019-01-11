@@ -50,7 +50,7 @@ class Band::RecordAlbum < ApplicationService
     recording_quality = (total - ego_reduction).round
     album.update(quality: recording_quality)
 
-    Band::AddFatigue.(band: band, range: 25..75)
+    Band::AddFatigue.(band: band, range: 25..75, activity: activity)
     Band::SpendMoney.(band: band, amount: studio.cost)
 
     band.happenings.create(what: "#{band.name} recorded an album named #{album.name}! It has a quality score of #{album.quality} and cost #{as_game_currency(studio.cost)} to record.", kind: 'record_album', activity_id: activity)

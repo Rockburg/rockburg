@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_07_205747) do
+ActiveRecord::Schema.define(version: 2019_01_10_223738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,25 +214,31 @@ ActiveRecord::Schema.define(version: 2019_01_07_205747) do
   create_table "recordings", force: :cascade do |t|
     t.bigint "studio_id"
     t.bigint "band_id"
-    t.string "kind"
-    t.string "name"
     t.integer "quality"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "sales", default: 0
-    t.datetime "release_at"
+    t.bigint "song_id"
     t.index ["band_id"], name: "index_recordings_on_band_id"
+    t.index ["song_id"], name: "index_recordings_on_song_id"
     t.index ["studio_id"], name: "index_recordings_on_studio_id"
   end
 
-  create_table "sashes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "recordings_releases", id: false, force: :cascade do |t|
+    t.bigint "recording_id", null: false
+    t.bigint "release_id", null: false
+    t.index ["recording_id", "release_id"], name: "index_recordings_releases_on_recording_id_and_release_id"
   end
 
-  create_table "single_albums", force: :cascade do |t|
-    t.integer "album_id"
-    t.integer "single_id"
+  create_table "releases", force: :cascade do |t|
+    t.bigint "band_id"
+    t.string "name"
+    t.string "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_releases_on_band_id"
+  end
+
+  create_table "sashes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -244,24 +250,25 @@ ActiveRecord::Schema.define(version: 2019_01_07_205747) do
     t.string "verb", default: "play"
   end
 
-  create_table "song_recordings", force: :cascade do |t|
-    t.bigint "recording_id"
-    t.bigint "song_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recording_id"], name: "index_song_recordings_on_recording_id"
-    t.index ["song_id"], name: "index_song_recordings_on_song_id"
-  end
-
   create_table "songs", force: :cascade do |t|
     t.bigint "band_id"
     t.string "name"
     t.integer "quality", default: 0
-    t.integer "streams", default: 0
     t.string "status", default: "writing"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["band_id"], name: "index_songs_on_band_id"
+  end
+
+  create_table "streams", force: :cascade do |t|
+    t.bigint "band_id"
+    t.bigint "release_id"
+    t.bigint "num_streams"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "for_date"
+    t.index ["band_id"], name: "index_streams_on_band_id"
+    t.index ["release_id"], name: "index_streams_on_release_id"
   end
 
   create_table "studios", force: :cascade do |t|
@@ -284,4 +291,7 @@ ActiveRecord::Schema.define(version: 2019_01_07_205747) do
 
   add_foreign_key "bands", "genres"
   add_foreign_key "happenings", "activities"
+  add_foreign_key "recordings", "songs"
+  add_foreign_key "streams", "bands"
+  add_foreign_key "streams", "releases"
 end

@@ -14,6 +14,6 @@ class ChartsController < ApplicationController
   end
 
   def releases
-    @releases = Recording.released.order(sales: :desc).limit(30)
+    #@releases = Release.join(:streams).order(num_streams: :desc).limit(30)
   end
 end

@@ -8,12 +8,11 @@ namespace :game do
     MemberBand.delete_all
     Band.delete_all
     Financial.delete_all
-    Activity.delete_all
+    Activity.destroy_all
     Gig.delete_all
     Recording.delete_all
-    SongRecording.delete_all
     Song.delete_all
-    SingleAlbum.delete_all
+    Release.delete_all
 
     puts "  Setting Starting Balance on Existing Managers and reset count".yellow
     Manager.find_each do |manager|
