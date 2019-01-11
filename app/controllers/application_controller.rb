@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
+  def not_implemented
+    raise ActionController::RoutingError.new('Not Implemented')
+  end
+
   private
 
   def set_last_seen_at

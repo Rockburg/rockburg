@@ -2,19 +2,23 @@ class MembersController < ApplicationController
   before_action :authenticate_manager!
   before_action :set_member, only: [:destroy]
   before_action :set_band, only: [:destroy]
+  skip_after_action :verify_authorized, only: :hire
   layout false, only: [:show]
 
   def index
+    not_implemented
   end
 
   def show
-    @member = Member.find_by_id(params[:id])
+    @member = policy_scope(Member).find_by_id(params[:id])
   end
 
   def new
+    not_implemented
   end
 
   def edit
+    not_implemented
   end
 
   # idea - conform hire to 'create' convention
@@ -28,8 +32,9 @@ class MembersController < ApplicationController
   end
 
   def destroy
+    authorize(@member)
     if @member.destroy
-      
+
       activity = Activity.create!(band: @band, action: :fired, starts_at: Time.now, ends_at: Time.now)
 
       @band.happenings.create(what: "#{@member.name} was fired!", kind: 'fired', activity_id: activity.id)
