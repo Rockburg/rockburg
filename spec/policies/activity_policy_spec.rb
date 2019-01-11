@@ -26,7 +26,7 @@ RSpec.describe ActivityPolicy do
     it { is_expected.to permit_action(:gig) }
     it { is_expected.to permit_action(:record_single) }
     it { is_expected.to permit_action(:record_album) }
-    it { is_expected.to permit_action(:release?) }
+    it { is_expected.to permit_action(:release) }
     it { is_expected.to permit_action(:rest) }
   end
 
@@ -41,7 +41,7 @@ RSpec.describe ActivityPolicy do
     it { is_expected.to forbid_action(:gig) }
     it { is_expected.to forbid_action(:record_single) }
     it { is_expected.to forbid_action(:record_album) }
-    it { is_expected.to forbid_action(:release?) }
+    it { is_expected.to forbid_action(:release) }
     it { is_expected.to forbid_action(:rest) }
   end
 end

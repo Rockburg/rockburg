@@ -6,8 +6,8 @@ RSpec.describe BandsController, type: :controller do
   context '#index' do
     subject { get(:index) }
 
-    it 'renders 200 status code' do
-      expect { subject }.to raise_error(ActionController::UrlGenerationError)
+    it 'renders not found' do
+      expect { subject }.to raise_error(ActionController::RoutingError)
     end
   end
 

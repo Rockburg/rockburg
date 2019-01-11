@@ -4,6 +4,7 @@ class BandsController < ApplicationController
   after_action :verify_policy_scoped, only: %i[index happenings allmembers]
 
   def index
+    not_implemented
   end
 
   def new

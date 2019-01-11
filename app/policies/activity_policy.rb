@@ -9,6 +9,7 @@ class ActivityPolicy < ApplicationPolicy
     :gig,
     :record_single,
     :record_album,
+    :release,
     :release_recording,
     :rest
   ].each do |symbol|
