@@ -117,7 +117,7 @@ RSpec.describe ActivitiesController, type: :controller do
     let(:recording) { create(:recording, band: band, studio: studio) }
 
     context 'anonymous' do
-      subject { get(:new, params: { band_id: band.id, type: :release, recording: { id: recording.id }, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute } ) }
 
       it 'is not allowed' do
         expect { subject }.to raise_error(Pundit::NotAuthorizedError)
@@ -125,7 +125,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, your band' do
-      subject { get(:new, params: { band_id: band.id, type: :release, recording: { id: recording.id }, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute } ) }
       before do
         sign_in current_manager
         subject
@@ -141,7 +141,7 @@ RSpec.describe ActivitiesController, type: :controller do
     end
 
     context 'manager, other band' do
-      subject { get(:new, params: { band_id: other_band.id, type: :release, recording: { id: recording.id }, hours: 1.minute } ) }
+      subject { get(:new, params: { band_id: other_band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute } ) }
       before do
         recording.update!(band: other_band)
         sign_in current_manager
