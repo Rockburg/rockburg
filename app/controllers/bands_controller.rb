@@ -1,21 +1,16 @@
 class BandsController < ApplicationController
   layout false, only: [:happenings, :allmembers]
-  skip_after_action :verify_authorized, only: %i[happenings allmembers]
-  after_action :verify_policy_scoped, only: %i[index happenings allmembers]
 
   def index
-    not_implemented
   end
 
   def new
-    @band = Band.new(manager: current_manager)
-    authorize(@band)
+    @band = Band.new
   end
 
   def create
     @band = Band.new(band_params)
     @band.manager = current_manager
-    authorize(@band)
     if @band.save
 
       activity = Activity.create!(band: @band, action: :formed, starts_at: Time.now, ends_at: Time.now)
@@ -34,8 +29,7 @@ class BandsController < ApplicationController
   end
 
   def show
-    @band = policy_scope(Band).where(id: params[:id]).first
-    authorize(@band)
+    @band = Band.where(id: params[:id]).first
     if !@band
       redirect_to dashboard_path
       return
@@ -44,11 +38,12 @@ class BandsController < ApplicationController
   end
 
   def happenings
-    @band = policy_scope(Band).find_by(id: params[:id])
+
+    @band = Band.where(id: params[:id]).first
   end
 
   def allmembers
-    @band = policy_scope(Band).find_by(id: params[:id])
+    @band = Band.where(id: params[:id]).first
   end
 
   private

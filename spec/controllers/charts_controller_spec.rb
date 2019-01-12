@@ -23,28 +23,4 @@ RSpec.describe ChartsController, type: :controller do
       # expect(assigns(:managers)) 'assigns' is now a separate gem...
     end
   end
-
-  context '#bands' do
-    before { get(:bands) }
-
-    it 'should return success' do
-      expect(response.successful?).to eq(true)
-    end
-  end
-
-  context '#managers' do
-    before { get(:managers) }
-
-    it 'should return success' do
-      expect(response.successful?).to eq(true)
-    end
-  end
-
-  context '#releases' do
-    before { get(:releases) }
-
-    it 'should return success' do
-      expect(response.successful?).to eq(true)
-    end
-  end
 end
