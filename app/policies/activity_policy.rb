@@ -7,6 +7,7 @@ class ActivityPolicy < ApplicationPolicy
     :practice,
     :write_song,
     :gig,
+    :record_single,
     :release,
     :rest
   ].each do |symbol|
