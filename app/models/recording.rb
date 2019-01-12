@@ -29,11 +29,6 @@ class Recording < ApplicationRecord
 
   has_and_belongs_to_many :releases
 
-  ## -- SCOPES
-  scope :albums, ->{ where(kind: :album) }
-  scope :singles, ->{ where(kind: :single) }
-  scope :released, ->{ where.not(release_at: nil) }
-
   ## — INSTANCE METHODS
   def full_recording
     "#{name} - (#{kind} -- Quality: #{quality})"
