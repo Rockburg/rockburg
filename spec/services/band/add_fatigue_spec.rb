@@ -5,6 +5,7 @@ RSpec.describe Band::AddFatigue, type: :service do
   let(:member2) { create(:member, primary_skill: Skill.find_by_name('Drummer')) }
   let(:genre) { Genre.find_by_style('Drum & Bass') }
   let(:band) { create :band, genre: genre }
+  let(:activity) { create :activity, band: band }
 
   it 'should add fatigue to all members' do
     band.add_member(member1, skill: member1.primary_skill)
@@ -13,7 +14,7 @@ RSpec.describe Band::AddFatigue, type: :service do
     m1_orig_fatigue = member1.trait_fatigue
     m2_orig_fatigue = member2.trait_fatigue
 
-    result = described_class.call(band: band, range: 10..20)
+    result = described_class.call(band: band, range: 10..20, activity: activity)
     expect(result.success?).to eq(true)
 
     member1.reload

@@ -1,6 +1,6 @@
 class Activity::ReleaseRecording < ApplicationService
   expects do
-    required(:band).filled    
+    required(:band).filled
     required(:recording_ids).filled
     optional(:hours)
     required(:release_name).filled
@@ -28,7 +28,6 @@ class Activity::ReleaseRecording < ApplicationService
     recordings.each do |recording|
       release.recordings << recording
     end
-
 
     Band::ReleaseWorker.perform_at(end_at, band.to_global_id, release.to_global_id, context.activity.id)
   end

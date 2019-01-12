@@ -5,6 +5,7 @@ RSpec.describe Band::Practice, type: :service do
   let(:member2) { create(:member) }
 
   let(:band) { create :band }
+  let(:activity) { create :activity, band: band }
 
   before do
     band.add_member(member1, skill: member1.primary_skill)
@@ -15,7 +16,7 @@ RSpec.describe Band::Practice, type: :service do
     orig_fatigue = [member1.trait_fatigue, member2.trait_fatigue]
     orig_level   = [member1.skill_primary_level, member2.skill_primary_level]
 
-    context = described_class.call(band: band, hours: 6)
+    context = described_class.call(band: band, hours: 6, activity: activity)
     member1.reload
     member2.reload
     expect(context.success?).to eq(true)
