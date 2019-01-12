@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe MemberBandPolicy do
   context 'anonymous' do
-    let(:band) { create(:band, manager: user) }
+    let(:band) { create(:band) }
     let(:member) { create(:member) }
     let(:member_band) { create(:member_band, band: band, member: member) }
     subject { described_class.new(nil, member_band) }
