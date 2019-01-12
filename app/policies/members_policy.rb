@@ -4,7 +4,7 @@ class MembersPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present?
+    true
   end
 
   def hire?

@@ -6,7 +6,7 @@ RSpec.describe MembersPolicy do
     subject { described_class.new(nil, member) }
 
     it { is_expected.to forbid_action(:index) }
-    it { is_expected.to forbid_action(:show) }
+    it { is_expected.to permit_action(:show) }
     it { is_expected.to forbid_action(:new) }
     it { is_expected.to forbid_action(:edit) }
     it { is_expected.to forbid_action(:hire) }

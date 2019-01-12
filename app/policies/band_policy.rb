@@ -4,7 +4,7 @@ class BandPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present?
+    true
   end
 
   def update?

@@ -6,7 +6,7 @@ class ActivitiesController < ApplicationController
     if band.overly_fatigued_members? and params[:type] != 'rest'
       redirect_to band_path(band), notice: "Your band is too tired!"
     else
-case params[:type]
+      case params[:type]
       when 'practice'
         context = Activity::Practice.call(
           band: params[:band_id],
