@@ -7,10 +7,7 @@ class ActivityPolicy < ApplicationPolicy
     :practice,
     :write_song,
     :gig,
-    :record_single,
-    :record_album,
     :release,
-    :release_recording,
     :rest
   ].each do |symbol|
     define_method "#{symbol}?" do
