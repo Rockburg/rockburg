@@ -17,13 +17,6 @@ class Band::ReleaseRecording < ApplicationService
 
   def call
     release.transaction do
-      #recording.release_at = Time.current
-
-      #recording.sales = Recording::CalcEarnings.(recording: recording).earnings
-      #recording.save!
-
-      #Band::EarnMoney.(band: band, amount: recording.sales)
-
       band.happenings.create(what: "You've released #{release.name} (#{release.kind}) and will start earning money from streams within a day!", kind: 'release_earned', activity_id: activity)
     end
   end

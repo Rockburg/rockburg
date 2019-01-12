@@ -12,7 +12,7 @@ RSpec.describe Band::WriteSong, type: :service do
     song = nil
 
     expect {
-      song = described_class.call(band: band, hours: 6).song
+      song = described_class.call(band: band, hours: 6, activity: create(:activity, band: band)).song
     }.to change { band.songs.count }.by(1)
 
     expect(song.quality).to be_positive
