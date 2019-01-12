@@ -44,8 +44,6 @@ class Manager < ApplicationRecord
   has_many :bands, counter_cache: :bands_count
   has_many :financials
   has_many :members, through: :bands
-  has_many :member_bands, through: :bands
-  has_many :recordings, through: :bands
 
   ## -- VALIDATIONS
   validates :name, uniqueness: true

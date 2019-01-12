@@ -31,9 +31,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise', github: 'plataformatec/devise' # , ref: '88e9a85'
 
-# Security
-gem 'pundit'
-
 # Background Processing
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
@@ -68,7 +65,6 @@ end
 
 group :test do
   gem 'rspec-sidekiq'
-  gem 'pundit-matchers'
 end
 
 group :development do

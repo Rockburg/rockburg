@@ -4,11 +4,11 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:destroy]
 
   def index
-    not_implemented
   end
 
   def destroy
     if @song.destroy
+
       activity = Activity.create!(band: @band, action: :song_deleted, starts_at: Time.now, ends_at: Time.now)
 
       @band.happenings.create(what: "#{@song.name} was thrown in the trash!", kind: 'trash', activity_id: activity.id)
@@ -27,7 +27,7 @@ class SongsController < ApplicationController
 
   def set_song
     @song = @band.songs.find(params[:id]) rescue nil
-    authorize(@song)
     redirect_to root_path, alert: "You can't do that." if @song.nil?
   end
+
 end

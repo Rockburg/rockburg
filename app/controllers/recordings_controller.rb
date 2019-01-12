@@ -27,7 +27,6 @@ class RecordingsController < ApplicationController
 
   def set_recording
     @recording = @band.recordings.find(params[:id]) rescue nil
-    authorize(@recording)
     redirect_to root_path, alert: "You can't do that." if @recording.nil?
   end
 end

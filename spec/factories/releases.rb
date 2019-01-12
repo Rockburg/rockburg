@@ -16,9 +16,8 @@
 
 FactoryBot.define do
   factory :release do
-    association :band
-
-    name { Faker::FunnyName.name }
-    kind { :single }
+    band { "" }
+    name { "" }
+    kind { "MyString" }
   end
 end
