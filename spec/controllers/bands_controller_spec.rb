@@ -70,9 +70,10 @@ RSpec.describe BandsController, type: :controller do
 
     context 'anonymous' do
       subject { get(:show, params: { id: band.id }) }
+      before { subject }
 
-      it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+      it 'renders 200 status code' do
+        expect(response.status).to be(200)
       end
     end
 

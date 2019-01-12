@@ -31,7 +31,7 @@
 
 FactoryBot.define do
   factory :manager do
-    name      { Faker::FunnyName.name }
+    name      { Faker::FunnyName.unique.name }
     email     { Faker::Internet.email }
     password  { "password" }
     password_confirmation { "password" }

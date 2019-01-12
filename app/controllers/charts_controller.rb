@@ -5,7 +5,7 @@ class ChartsController < ApplicationController
   def index
     @managers = policy_scope(Manager).with_bands.order(balance: :desc).limit(5)
     @bands = policy_scope(Band).order(buzz: :desc).joins(:manager).limit(5)
-    @releases = policy_scope(Recording).released.order(sales: :desc).limit(5)
+    @releases = policy_scope(Release).order(num_streams: :desc).limit(5)
   end
 
   def bands
