@@ -32,13 +32,12 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    authorize(@member)
-    if @member.destroy
-
+    authorize(@member_band)
+    if @member_band.destroy
       activity = Activity.create!(band: @band, action: :fired, starts_at: Time.now, ends_at: Time.now)
 
-      @band.happenings.create(what: "#{@member.name} was fired!", kind: 'fired', activity_id: activity.id)
-      redirect_to band_path(@band), alert: "#{@member.name} was fired."
+      @band.happenings.create(what: "#{@member_band.member.name} was fired!", kind: 'fired', activity_id: activity.id)
+      redirect_to band_path(@band), alert: "#{@member_band.member.name} was fired."
     else
       redirect_to root_path, alert: 'Something went wrong.'
     end
@@ -47,8 +46,8 @@ class MembersController < ApplicationController
   private
 
   def set_member
-    @member = current_manager.members.find(params[:member_id]) rescue nil
-    redirect_to root_path, alert: "You can't do that." if @member.nil?
+    @member_band = current_manager.member_bands.find_by(member_id: params[:member_id])
+    redirect_to root_path, alert: "You can't do that." if @member_band.nil?
   end
 
   def set_band
