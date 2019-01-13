@@ -77,6 +77,14 @@ RSpec.describe BandsController, type: :controller do
       end
     end
 
+    context 'invalid band' do
+      subject { get(:show, params: { id: -1 }) }
+
+      it 'redirects to dashboard' do
+        expect(subject).to redirect_to(dashboard_path)
+      end
+    end
+
     context 'manager' do
       let!(:other_band) { create(:band, manager: create(:manager)) }
       subject { get(:show, params: { id: band.id }) }

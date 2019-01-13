@@ -35,11 +35,12 @@ class BandsController < ApplicationController
 
   def show
     @band = policy_scope(Band).where(id: params[:id]).first
-    authorize(@band)
-    if !@band
+    unless @band
+      skip_authorization
       redirect_to dashboard_path
       return
     end
+    authorize(@band)
     @activity = @band.activities.current_activity.try(:last)
   end
 
