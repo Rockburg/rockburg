@@ -67,8 +67,9 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rspec-sidekiq'
   gem 'pundit-matchers'
+  gem 'rails-controller-testing'
+  gem 'rspec-sidekiq'
   gem 'rspec_junit_formatter'
 end
 

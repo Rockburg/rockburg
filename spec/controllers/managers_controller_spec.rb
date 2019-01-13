@@ -1,18 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe ManagersController, type: :controller do
-  let(:current_manager) { create(:manager) }
+  let!(:current_manager) { create(:manager) }
+  let!(:band) { create(:band, manager: current_manager) }
 
   before do
     @other_managers = create_list(:manager, 5)
+    @other_managers.each do |manager|
+      create(:band, manager: manager)
+    end
     sign_in current_manager
   end
 
   context '#index' do
-    before { get(:index) }
+    subject { get(:index) }
 
     it 'should return success' do
+      subject
       expect(response.successful?).to eq(true)
+    end
+
+    it 'renders show' do
+      expect(subject).to render_template(:show)
+    end
+
+    it 'should set your bands' do
+      subject
+      expect(assigns(:bands)).to eq current_manager.bands.all
+    end
+
+    it 'should set your badges' do
+      subject
+      expect(assigns(:badges)).to eq current_manager.badges
     end
   end
 
