@@ -51,9 +51,16 @@ class ActivitiesController < ApplicationController
         raise ArgumentError.new("Unknown Type[#{params[:type]}]")
       end
 
-      if context && context.activity.save
-        redirect_to band_path(band)
+      if context && context.success?
+        authorize(context.activity, "#{params[:type]}?")
+
+        if context.activity.save
+          redirect_to band_path(band)
+          return
+        end
       end
     end
+
+    head :unprocessable
   end
 end
