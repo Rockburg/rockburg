@@ -2,9 +2,10 @@ class ManagersController < ApplicationController
   before_action :authenticate_manager!, except: [:show]
 
   def index
-    @manager = authorize(current_manager)
-    @bands = policy_scope(Band).all
+    @manager = current_manager
+    @bands = policy_scope(Band).where(manager_id: current_manager.id).all
     @badges = current_manager.badges
+
     render(:action => 'show')
   end
 
