@@ -30,6 +30,23 @@ RSpec.describe ActivitiesController, type: :controller do
       end
     end
 
+    context 'manager, overly fatigued members' do
+      subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute } ) }
+      before do
+        sign_in current_manager
+        create(:member_band, band: band, member: create(:member, trait_fatigue: 105))
+      end
+
+      it 'redirects back to band path' do
+        expect(subject).to redirect_to(band_path(band))
+      end
+
+      it 'flashes too tired' do
+        subject
+        expect(flash[:notice]).to eq('Your band is too tired!')
+      end
+    end
+
     context 'manager, other band' do
       subject { get(:new, params: { band_id: other_band.id, type: :practice, hours: 1.minute } ) }
       before { sign_in current_manager }
