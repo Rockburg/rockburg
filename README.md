@@ -11,7 +11,7 @@ You can access the super-extra-alpha version of the game now: https://alpha.rock
 But beware it will frequently be wiped clean until we officially launch.
 
 ## Codebase
-The current codebase is vanilla Rails. Really nothing out of the ordinary here. Locally it's using SQLite locally for the data store and Sidekiq for workers.
+The current codebase is vanilla Rails. Really nothing out of the ordinary here.
 
 ![image](https://circleci.com/gh/Rockburg/rockburg.svg?style=shield&circle-token=:circle-ci-badge-token)
 
