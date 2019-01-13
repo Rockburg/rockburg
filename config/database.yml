@@ -12,7 +12,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: rockburg_test
+  url: <%= ENV['DATABASE_URL'] || 'postgres://localhost/rockburg_test' %>
 
 production:
   <<: *default
