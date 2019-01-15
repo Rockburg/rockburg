@@ -10,7 +10,7 @@ RSpec.describe RecordingsController, type: :controller do
 
     # context 'anonymous' do
     #   it 'should redirect' do
-    #     expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+    #     expect(subject).to redirect_to(root_url)
     #   end
     # end
 

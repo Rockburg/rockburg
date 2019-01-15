@@ -16,7 +16,7 @@ RSpec.describe BandsController, type: :controller do
 
     context 'anonymous' do
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe BandsController, type: :controller do
       subject { post(:create, params: { band: band } ) }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
 
