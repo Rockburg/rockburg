@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_last_seen_at, if: proc { manager_signed_in? }
   after_action :verify_authorized, except: :index, unless: :devise_controller?
   after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def current_user
     current_manager
@@ -29,5 +30,10 @@ class ApplicationController < ActionController::Base
 
   def set_last_seen_at
     current_manager.update_attribute(:last_seen_at, Time.current)
+  end
+
+  def user_not_authorized
+    flash[:alert] = "Woah! It looks like you can't do this."
+    redirect_to(request.referrer || root_path)
   end
 end

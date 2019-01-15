@@ -10,7 +10,7 @@ RSpec.describe ActivitiesController, type: :controller do
       subject { get(:new, params: { band_id: band.id, type: :practice, hours: 1.minute } ) }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
 
@@ -52,7 +52,7 @@ RSpec.describe ActivitiesController, type: :controller do
       before { sign_in current_manager }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
   end
@@ -62,7 +62,7 @@ RSpec.describe ActivitiesController, type: :controller do
       subject { get(:new, params: { band_id: band.id, type: :write_song, hours: 1.minute } ) }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
 
@@ -87,7 +87,7 @@ RSpec.describe ActivitiesController, type: :controller do
       before { sign_in current_manager }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
   end
@@ -99,7 +99,7 @@ RSpec.describe ActivitiesController, type: :controller do
       subject { get(:new, params: { band_id: band.id, type: :gig, venue: venue, hours: 1.minute } ) }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
 
@@ -124,7 +124,7 @@ RSpec.describe ActivitiesController, type: :controller do
       before { sign_in current_manager }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
   end
@@ -137,7 +137,7 @@ RSpec.describe ActivitiesController, type: :controller do
       subject { get(:new, params: { band_id: band.id, type: :release, recording_ids: [recording.id], release: { name: Faker::FunnyName.name, kind: :album }, hours: 1.minute } ) }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
 
@@ -165,7 +165,7 @@ RSpec.describe ActivitiesController, type: :controller do
       end
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
   end
@@ -175,7 +175,7 @@ RSpec.describe ActivitiesController, type: :controller do
       subject { get(:new, params: { band_id: band.id, type: :rest, hours: 1.minute } ) }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
 
@@ -200,7 +200,7 @@ RSpec.describe ActivitiesController, type: :controller do
       before { sign_in current_manager }
 
       it 'is not allowed' do
-        expect { subject }.to raise_error(Pundit::NotAuthorizedError)
+        expect(subject).to redirect_to(root_url)
       end
     end
   end
