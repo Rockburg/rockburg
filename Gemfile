@@ -40,6 +40,10 @@ gem 'sidekiq-scheduler'
 gem 'sidekiq-failures', github: 'bsharpe/sidekiq-failures', branch: :master
 gem 'sidekiq-global_id'
 
+# Email
+gem 'inky-rb', require: 'inky'
+gem 'premailer-rails' # Stylesheet inlining for email
+
 # Intra-App messaging
 # gem 'wisper'
 

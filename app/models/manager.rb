@@ -73,8 +73,17 @@ class Manager < ApplicationRecord
   end
 
   def update_balance!
+    was_low_balance = self.low_balance?
+    was_negative = self.negative?
+
     cur_balance = self.update_balance
     self.update_columns(balance: cur_balance)
+
+    if !was_negative && self.negative?
+      ManagerMailer.with(user: self).balance_negative.deliver_later
+    elsif !was_low_balance && self.low_balance?
+      ManagerMailer.with(user: self).balance_getting_low.deliver_later
+    end
   end
 
   def avatar_url

@@ -16,4 +16,26 @@ RSpec.describe Band::SpendMoney, type: :service do
       described_class.call(band: band, amount: 123)
     }.to change{ band.manager.balance }.by(-123)
   end
+
+  context 'low balance' do
+    subject { described_class.call(band: band, amount: 300) }
+
+    it 'should queue a low balance email' do
+      expect { subject }
+        .to have_enqueued_job(ActionMailer::Parameterized::DeliveryJob)
+        .with('ManagerMailer', 'balance_getting_low', 'deliver_now', user: band.manager)
+        .on_queue('mailers')
+    end
+  end
+
+  context 'negative balance' do
+    subject { described_class.call(band: band, amount: 600) }
+
+    it 'should queue a negative balance email' do
+      expect { subject }
+        .to have_enqueued_job(ActionMailer::Parameterized::DeliveryJob)
+        .with('ManagerMailer', 'balance_negative', 'deliver_now', user: band.manager)
+        .on_queue('mailers')
+    end
+  end
 end
