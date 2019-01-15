@@ -3,7 +3,7 @@ class ManagersController < ApplicationController
 
   def index
     @manager = current_manager
-    @bands = policy_scope(Band).where(manager_id: current_manager.id).all
+    @bands = policy_scope(Band).where(manager_id: current_manager.id).all.order(:name)
     @badges = current_manager.badges
 
     render(:action => 'show')
