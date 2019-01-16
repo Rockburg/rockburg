@@ -85,7 +85,7 @@ class Manager < ApplicationRecord
     self.bands.each do |band|
       band.recordings.destroy_all
     end
-    self.bands.destroy_all
+    self.bands.delete_all
     self.financials.destroy_all
     self.give_starting_balance
     Manager.reset_counters(self.id, :bands)
