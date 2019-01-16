@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def index
     skip_policy_scope
-    # code
+    
+    redirect_to dashboard_path if current_manager
   end
 end
