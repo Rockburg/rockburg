@@ -10,7 +10,6 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  */
 
@@ -23,6 +22,7 @@ $blue: #2178E6;
 $green: #13D87B;
 //$primary: #292F36;
 
+@import "fonts";
 @import "bootstrap";
 @import "font-awesome";
 
