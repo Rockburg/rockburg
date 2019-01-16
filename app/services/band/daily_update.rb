@@ -45,7 +45,7 @@ class Band::DailyUpdate < ApplicationService
         stream.num_streams = streams
       end
 
-      band.happenings.create(what: "#{band.name} made #{as_game_currency(earnings)} from #{streams} streams of #{release.name}.", kind: 'earned', activity_id: activity_id)
+      band.happenings.create(what: "#{band.name} made #{as_game_currency(earnings)} from #{number_with_delimiter(streams.to_i)} streams of #{release.name}.", kind: 'earned', activity_id: activity_id)
     end
   end
 
