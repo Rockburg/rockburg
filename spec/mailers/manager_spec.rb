@@ -7,7 +7,7 @@ RSpec.describe ManagerMailer, type: :mailer do
     let(:mail) { manager_mailer.with(user: manager).balance_getting_low }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Balance is getting low!")
+      expect(mail.subject).to eq("[Rockburg] Balance is getting low!")
       expect(mail.to).to eq([manager.email])
       expect(mail.from).to eq(["hello@rockburg.com"])
     end
@@ -27,7 +27,7 @@ RSpec.describe ManagerMailer, type: :mailer do
     let(:mail) { manager_mailer.with(user: manager).balance_negative }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Balance is negative!")
+      expect(mail.subject).to eq("[Rockburg] Balance is negative!")
       expect(mail.to).to eq([manager.email])
       expect(mail.from).to eq(["hello@rockburg.com"])
     end
