@@ -32,14 +32,14 @@
 en:
   manager_mailer:
     balance_getting_low:
-      subject: Balance is getting low!
+      subject: "[Rockburg] Balance is getting low!"
       body:
         header: Your balance (%{balance}) is getting low!
         description: If you drop below zero you risk going bankrupt!
         action: Let's get to work!
 
     balance_negative:
-      subject: Balance is negative!
+      subject: "[Rockburg] Balance is negative!"
       body:
         header: Your balance has dropped below zero!
         description: If you go below %{balance} you'll go bankrupt and be forced to start over!
