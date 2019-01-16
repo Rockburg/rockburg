@@ -1,0 +1,18 @@
+<container class="body-border">
+  <row>
+    <columns>
+      <h4 class="text-center"><%= t '.body.header', balance: @balance %></h4>
+      <p class="alert alert-warning text-center" role="alert"><%= t '.body.description' %></p>
+    </columns>
+  </row>
+
+  <row>
+    <columns>
+      <center>
+        <button class="large" href="<%= dashboard_url %>"><%= t '.body.action' %></button>
+      </center>
+    </columns>
+  </row>
+
+  <%= render partial: "mailer/footer" %>
+</container>

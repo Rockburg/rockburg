@@ -1,0 +1,12 @@
+<container class="body-border">
+  <spacer size="25"></spacer>
+
+  <row>
+    <columns>
+      <h1 class="text-center"><%= @user.name %></h1>
+      <center>
+        <%= image_tag @user.avatar_url, class: 'avatar rounded float-left', width: "50px" %>
+      </center>
+    </columns>
+  </row>
+</container>
