@@ -11,6 +11,7 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'sidekiq/testing'
 require 'capybara/rspec'
+require 'action_cable/testing/rspec'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 

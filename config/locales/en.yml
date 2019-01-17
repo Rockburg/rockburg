@@ -44,3 +44,10 @@ en:
         header: Your balance has dropped below zero!
         description: If you go below %{balance} you'll go bankrupt and be forced to start over!
         action: I need to do something!
+
+    activity_completed:
+      subject: "[Rockburg] %{band_name} %{action}!"
+      body:
+        header: "%{band}"
+        description: "%{activity}"
+        action: Let's check it out!

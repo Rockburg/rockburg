@@ -1,0 +1,9 @@
+<%= t '.body.header', band: @band.name %>
+
+<% @activity.happenings.each do |happening| %>
+  - <%= t '.body.description', activity: happening.what %>
+<% end %>
+
+<%= t '.body.action' %>
+
+<%= dashboard_url %>

@@ -44,6 +44,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    action-cable-testing (0.4.0)
+      actioncable (~> 5.0)
     actioncable (5.2.2)
       actionpack (= 5.2.2)
       nio4r (~> 2.0)
@@ -395,6 +397,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action-cable-testing (~> 0.4.0)
   annotate!
   awesome_print
   bcrypt (~> 3.1.7)

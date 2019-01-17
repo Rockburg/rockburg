@@ -1,4 +1,9 @@
 $body-font-family: 'Open Sans', sans-serif;
+$success: #13D87B;
+$teal: #20c997;
+$danger: #dc3545;
+$primary: #2178E6;
+$purple: #6f42c1;
 
 @import "foundation-emails";
 
@@ -12,3 +17,24 @@ p {
   margin-right: 30px;
 }
 
+.happenings {
+  .happening {
+    position: relative;
+
+    &:before {
+      content: '';
+      width: 30px;
+      height: 5px;
+      display: block;
+      background: #adb5bd;
+      border-radius: 100px;
+    }
+
+    &.earned { &:before { background: $success; } }
+    &.wrote_song { &:before { background: $teal; } }
+    &.fatigue_decrease { &:before { background: $success; } }
+    &.fatigue_increase { &:before { background: $danger; } }
+    &.record_single { &:before { background: $primary; } }
+    &.skill_increase { &:before { background: $purple; } }
+  }
+}
