@@ -49,7 +49,7 @@ RSpec.describe ManagerMailer, type: :mailer do
     let(:mail) { manager_mailer.with(user: manager, band: band, activity: activity).activity_completed }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("[Rockburg] Practice has completed!")
+      expect(mail.subject).to eq("[Rockburg] #{band.name} has finished practicing!")
       expect(mail.to).to eq([manager.email])
       expect(mail.from).to eq(["hello@rockburg.com"])
     end
