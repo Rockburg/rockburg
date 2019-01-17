@@ -71,6 +71,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'action-cable-testing', '~> 0.4.0'
   gem 'pundit-matchers'
   gem 'rails-controller-testing'
   gem 'rspec-sidekiq'

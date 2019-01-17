@@ -1,0 +1,22 @@
+<container class="body-border">
+  <row>
+    <columns>
+      <h4 class="text-center"><%= t '.body.header', band: @band.name %></h4>
+      <section class="happenings">
+        <% @activity.happenings.each do |happening| %>
+          <p class="text-center happening <%= happening.kind %>" role="alert"><%= t '.body.description', activity: happening.what %></p>
+        <% end %>
+      </section>
+    </columns>
+  </row>
+
+  <row>
+    <columns>
+      <center>
+        <button class="large" href="<%= dashboard_url %>"><%= t '.body.action' %></button>
+      </center>
+    </columns>
+  </row>
+
+  <%= render partial: "mailer/footer" %>
+</container>
