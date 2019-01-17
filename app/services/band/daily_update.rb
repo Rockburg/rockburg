@@ -1,5 +1,6 @@
 class Band::DailyUpdate < ApplicationService
   include ApplicationHelper
+  include ActionView::Helpers::NumberHelper
   expects do
     required(:band).filled
   end
