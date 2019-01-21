@@ -16,12 +16,15 @@ The current codebase is vanilla Rails. Really nothing out of the ordinary here.
 ![image](https://circleci.com/gh/Rockburg/rockburg.svg?style=shield&circle-token=:circle-ci-badge-token)
 
 ## Local setup
+
+You need to have redis installed to run sidekiq: [follow installation instructions here](https://redis.io/download#installation)
+
 ```bash
 $ bundle && rake db:setup # sets up the database and loads seed data
 $ bundle exec puma # starts webserver
 
 # in another console tab...
-$ sidekiq # required for background jobs, which much of the app relies on
+$ redis-server & sidekiq # required for background jobs, which much of the app relies on
 ```
 
 ## Contributing
