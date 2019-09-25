@@ -5,7 +5,7 @@ after :genres do
     500.times {
       m = Member.create!(
         name: Faker::FunnyName.name,
-        birthdate: Faker::Date.birthday(15, 75),
+        birthdate: Faker::Date.birthday(min_age: 15, max_age: 75),
         trait_ego: rand(0..100),
         trait_looks: rand(0..100),
         trait_creativity: Sample.weighted(1..100),

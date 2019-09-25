@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '2.6.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Framework
-gem 'rails', '~> 5.2'
+gem 'rails', '~> 6.0.0'
 
 # Webserver
 gem 'puma'
@@ -71,7 +71,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'action-cable-testing', '~> 0.4.0'
   gem 'pundit-matchers'
   gem 'rails-controller-testing'
   gem 'rspec-sidekiq'
