@@ -35,7 +35,7 @@ But almost any contribution will be beneficial at this point as all the work I'v
 If you've got an improvement, just send in a pull request. If you've got feature ideas, simply [open a new issues](https://github.com/withspectrum/spectrum/issues/new)!
 
 ### Chat
-We've set up a Slack channel for development (and general game discussion): http://chat.rockburg.com
+We've set up [a Discord channel](https://discord.gg/XbqbPpr) for development (and general game discussion): https://discord.gg/XbqbPpr
 
 ## License & Copyright
 Released under the MIT license, see the [LICENSE](./LICENSE) file. Copyright (c) 2019 Sabotage Media LLC.
