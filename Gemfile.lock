@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/Rockburg/merit.git
-  revision: a95ab8709ac7e43107b67bc4c729a14a23c922f8
-  branch: master
-  specs:
-    merit (3.0.1)
-      ambry (~> 1.0.0)
-
-GIT
   remote: https://github.com/bsharpe/hirb.git
   revision: dec26c0905a0475d3f58be45709038f50f58759d
   branch: master
@@ -101,7 +93,6 @@ GEM
       zeitwerk (~> 2.1, >= 2.1.8)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    ambry (1.0.0)
     ast (2.4.0)
     autoprefixer-rails (9.6.1.1)
       execjs
@@ -439,7 +430,6 @@ DEPENDENCIES
   interactor
   interactor-contracts
   jquery-rails
-  merit!
   pg
   premailer-rails
   pry
