@@ -1,0 +1,10 @@
+<h2>Sign up</h2>
+
+<%= form_for @manager do |f| %>
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: 'form-control form-control-lg' %>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Sign up</button>
+<% end %>

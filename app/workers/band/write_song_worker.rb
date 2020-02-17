@@ -6,7 +6,5 @@ class Band::WriteSongWorker < Band::ActivityWorker
     activity = Activity.ensure(activity)
 
     announce_completion band, activity
-
-    band.manager.add_badge(5) unless band.manager.badges.collect(&:id).include?(5)
   end
 end

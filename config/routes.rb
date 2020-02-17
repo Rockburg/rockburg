@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-  devise_for :managers
+  passwordless_for :managers
 
   resources :bands do
     member do
@@ -39,10 +39,9 @@ Rails.application.routes.draw do
     end
   end
 
-
   get 'dashboard', to: 'managers#index', as: :dashboard
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root to: "pages#index"
+  root "pages#index"
 end

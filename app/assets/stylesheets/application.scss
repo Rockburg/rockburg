@@ -13,13 +13,14 @@
  *= require_self
  */
 
- // Custom bootstrap variables must be set or imported *before* bootstrap.
-$font-family-sans-serif: 'Open Sans', sans-serif;
-$headings-font-family:  'Nunito', sans-serif;
-$font-family-monospace: 'Almamono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+$font-family-sans-serif: "Open Sans", sans-serif;
+$headings-font-family: "Nunito", sans-serif;
+$font-family-monospace: "Almamono", SFMono-Regular, Menlo, Monaco, Consolas,
+  "Liberation Mono", "Courier New", monospace;
 $headings-font-weight: 700;
-$blue: #2178E6;
-$green: #13D87B;
+$blue: #2178e6;
+$green: #13d87b;
 //$primary: #292F36;
 
 @import "fonts";
@@ -29,7 +30,6 @@ $green: #13D87B;
 button {
   cursor: pointer;
 }
-
 
 .navbar {
   font-weight: 700;
@@ -46,9 +46,9 @@ button {
 .bd-footer {
   border-top: 1px solid #f7f7f7;
   background: #fcfcfc;
-  font-size:85%;
+  font-size: 85%;
   .text-muted {
-    color: #6c757d!important;
+    color: #6c757d !important;
   }
   a {
     font-weight: bold;
@@ -62,14 +62,14 @@ button {
 .news {
   margin: 0;
   padding: 0;
-  max-height:510px;
-  overflow:auto;
+  max-height: 510px;
+  overflow: auto;
   list-style-type: none;
   ul {
     margin: 0;
     padding: 0;
-    max-height:510px;
-    overflow:auto;
+    max-height: 510px;
+    overflow: auto;
     list-style-type: none;
   }
   li {
@@ -82,13 +82,13 @@ button {
     }
   }
   li li {
-    margin:0;
-    padding:0 0 0 15px;
+    margin: 0;
+    padding: 0 0 0 15px;
     position: relative;
     font-size: 95%;
     border: 0;
     &:before {
-      content: '';
+      content: "";
       width: 5px;
       height: 14px;
       display: block;
@@ -98,30 +98,35 @@ button {
       position: absolute;
       border-radius: 100px;
     }
-    &.earned { &:before { background: $success; } }
-    &.wrote_song { &:before { background: $teal; } }
-    &.fatigue_decrease { &:before { background: $success; } }
-    &.fatigue_increase { &:before { background: $danger; } }
-    &.record_single { &:before { background: $primary; } }
-    &.skill_increase { &:before { background: $purple; } }
-  }
-}
-
-.badge-listing {
-  .badge {
-    padding: 8px 10px 8px 25px;
-    position: relative;
-    margin-right: 5px;
-    &:before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      display: block;
-      background: $white;
-      left: 10px;
-      top: 9px;
-      position: absolute;
-      border-radius: 100px;
+    &.earned {
+      &:before {
+        background: $success;
+      }
+    }
+    &.wrote_song {
+      &:before {
+        background: $teal;
+      }
+    }
+    &.fatigue_decrease {
+      &:before {
+        background: $success;
+      }
+    }
+    &.fatigue_increase {
+      &:before {
+        background: $danger;
+      }
+    }
+    &.record_single {
+      &:before {
+        background: $primary;
+      }
+    }
+    &.skill_increase {
+      &:before {
+        background: $purple;
+      }
     }
   }
 }

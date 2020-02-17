@@ -11,7 +11,5 @@ class Band::PlayGigWorker < Band::ActivityWorker
       band_fans: band.fans,
       band_buzz: band.buzz,
       balance: "#{as_game_currency(band.manager.balance)}"
-
-    band.manager.add_badge(6) unless band.manager.badges.collect(&:id).include?(6)
   end
 end

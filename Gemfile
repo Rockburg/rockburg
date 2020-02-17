@@ -29,7 +29,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # User Authentication
 gem 'bcrypt', '~> 3.1.7'
-gem 'devise', github: 'plataformatec/devise' # , ref: '88e9a85'
+gem 'passwordless'
 
 # Security
 gem 'pundit'
@@ -85,6 +85,7 @@ group :development do
   gem 'hirb', github: 'bsharpe/hirb', branch: :master # nice record display in console
   gem 'rubocop', require: false # style cop
   gem 'foreman', require: false # running background workers
+  gem 'letter_opener' # Test emails
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

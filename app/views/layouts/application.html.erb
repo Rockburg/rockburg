@@ -11,16 +11,16 @@
 
   <body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>" data-id="<%= params[:id].to_i if params[:id].present? %>">
     <header class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
-      <%= link_to image_tag('logo-rockburg.svg', class: 'd-inline-block align-top'), root_path, class: 'navbar-brand' %>
+      <%= link_to image_tag('logo-rockburg.svg', class: 'd-inline-block align-top'), '/', class: 'navbar-brand' %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <% if manager_signed_in? %>
+      <% if current_user %>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <%= link_to('<i class="fa fa-columns"></i> Dashboard'.html_safe, dashboard_path, class: 'nav-item nav-link') %>
           <%= link_to('<i class="fa fa-line-chart"></i> Charts'.html_safe, charts_path, class: 'nav-item nav-link') %>
-          <%= link_to('<i class="fa fa-user-circle"></i> Profile'.html_safe, manager_path(current_manager), class: 'nav-item nav-link') %>
+          <%#= link_to('<i class="fa fa-user-circle"></i> Profile'.html_safe, manager_path(current_manager), class: 'nav-item nav-link') %>
         </div>
       </div>
       <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
@@ -31,12 +31,12 @@
         <li class="nav-item">
           <a href="#" role="button" class="text-light nav-link btn btn-success">Money <span class="badge badge-light data-balance"><%= as_game_currency(current_manager.balance) %></span></a>
         </li>
-        <li class="nav-item"><%= link_to "Sign Out", destroy_manager_session_path, method: :delete, class: 'nav-link' %></li>
+        <li class="nav-item"><%#= link_to "Sign Out", destroy_manager_session_path, method: :delete, class: 'nav-link' %></li>
       </ul>
       <% else %>
       <div class="navbar-nav">
-        <%= link_to "Log in", new_manager_session_path, class: 'btn btn-dark' %> &nbsp;
-        <%= link_to "Sign Up", new_manager_registration_path, class: 'btn btn-dark' %>
+        <%= link_to "Log in", managers.sign_in_path, class: 'btn btn-dark' %> &nbsp;
+        <%= link_to "Sign Up", '/managers/new', class: 'btn btn-dark' %>
       </div>
       <% end %>
     </header>

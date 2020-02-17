@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_16_230735) do
+ActiveRecord::Schema.define(version: 2020_02_16_232345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,15 +107,6 @@ ActiveRecord::Schema.define(version: 2020_02_16_230735) do
 
   create_table "managers", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -124,7 +115,6 @@ ActiveRecord::Schema.define(version: 2020_02_16_230735) do
     t.datetime "last_seen_at"
     t.index ["balance"], name: "index_managers_on_balance"
     t.index ["email"], name: "index_managers_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
   end
 
   create_table "member_bands", force: :cascade do |t|
@@ -162,6 +152,20 @@ ActiveRecord::Schema.define(version: 2020_02_16_230735) do
     t.integer "skill_tertiary_level", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "passwordless_sessions", force: :cascade do |t|
+    t.string "authenticatable_type"
+    t.bigint "authenticatable_id"
+    t.datetime "timeout_at", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "claimed_at"
+    t.text "user_agent", null: false
+    t.string "remote_addr", null: false
+    t.string "token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["authenticatable_type", "authenticatable_id"], name: "authenticatable"
   end
 
   create_table "recordings", force: :cascade do |t|

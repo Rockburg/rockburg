@@ -30,10 +30,7 @@
 #
 
 class Manager < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  passwordless_with :email
 
   ## -- SCOPES
   scope :with_bands, -> { where('bands_count > 0') }
@@ -47,23 +44,21 @@ class Manager < ApplicationRecord
 
   ## -- VALIDATIONS
   validates :name, uniqueness: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates_format_of :email, with: /@/
 
   ## -- CALLBACKS
   after_create :give_starting_balance
-  after_create :give_badge
 
   ## — INSTANCE METHODS
   def to_param
-    [id, name.parameterize].join("-")
+    #[id, name.parameterize].join("-")
+    id
   end
 
   def give_starting_balance
     self.financials.create!(amount: 500) if !self.financials.exists?
     self.update_balance
-  end
-
-  def give_badge
-    self.add_badge(1)
   end
 
   def update_balance

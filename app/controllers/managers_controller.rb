@@ -1,18 +1,31 @@
 class ManagersController < ApplicationController
-  before_action :authenticate_manager!, except: [:show]
+  before_action :require_user!, except: [:new, :show, :create]
 
   def index
     @manager = current_manager
     @bands = policy_scope(Band).where(manager_id: current_manager.id).all.order(:name)
-    @badges = current_manager.badges
 
     render(:action => 'show')
+  end
+
+  def new
+    @manager = Manager.new
+  end
+
+  def create
+    @manager = Manager.new manager_params
+  
+    if @manager.save
+      sign_in @manager
+      redirect_to @manager, flash: { notice: 'Welcome!' }
+    else
+      render :new
+    end
   end
 
   def show
     @manager = authorize(policy_scope(Manager).find(params[:id]))
     @bands = @manager.bands.all
-    @badges = @manager.badges
   end
 
   def edit
@@ -26,5 +39,11 @@ class ManagersController < ApplicationController
     elsif
       redirect_to dashboard_path
     end
+  end
+
+  private
+
+  def manager_params
+    params.require(:manager).permit(:email)
   end
 end
