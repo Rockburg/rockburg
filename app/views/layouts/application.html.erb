@@ -1,86 +1,59 @@
 <!DOCTYPE html>
-<html>
+  <html lang="en" dir="ltr">
   <head>
+    <meta charset="utf-8" />
     <title>Rockburg</title>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700,700i|Open+Sans:400,400i,600,600i,700,700i" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/bfh3gim.css" />
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>" data-id="<%= params[:id].to_i if params[:id].present? %>">
-    <header class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
-      <%= link_to image_tag('logo-rockburg.svg', class: 'd-inline-block align-top'), root_path, class: 'navbar-brand' %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <% if manager_signed_in? %>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <%= link_to('<i class="fa fa-columns"></i> Dashboard'.html_safe, dashboard_path, class: 'nav-item nav-link') %>
-          <%= link_to('<i class="fa fa-line-chart"></i> Charts'.html_safe, charts_path, class: 'nav-item nav-link') %>
-          <%= link_to('<i class="fa fa-user-circle"></i> Profile'.html_safe, manager_path(current_manager), class: 'nav-item nav-link') %>
+    <div class="wrapper">
+      <header role="banner">
+        <div class="logo">
+          <%= link_to image_tag('logo-rockburg.svg',), root_path %>
         </div>
-      </div>
-      <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-        <li class="nav-item py-2 px-4">
-          <%- last_reset = Time.parse(GameDatum.get(:last_reset) ||' 2018-04-13 15:51:17 -0500')%>
-          <small class="text-light">Game last reset <b><u><%= time_ago_in_words(last_reset, vague: true) %> ago</u></b></small>
-        </li>
-        <li class="nav-item">
-          <a href="#" role="button" class="text-light nav-link btn btn-success">Money <span class="badge badge-light data-balance"><%= as_game_currency(current_manager.balance) %></span></a>
-        </li>
-        <li class="nav-item"><%= link_to "Sign Out", destroy_manager_session_path, method: :delete, class: 'nav-link' %></li>
-      </ul>
-      <% else %>
-      <div class="navbar-nav">
-        <%= link_to "Log in", new_manager_session_path, class: 'btn btn-dark' %> &nbsp;
-        <%= link_to "Sign Up", new_manager_registration_path, class: 'btn btn-dark' %>
-      </div>
-      <% end %>
-    </header>
-    <div class="container my-5" role="main">
-      <% if current_manager.present? and current_manager.bankrupt? %>
-      <div class="modal bankrupt" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">You're Bankrupt!</h5>
+        <nav>
+          <ul>
+            <li><%= link_to 'Your Bands', dashboard_path, class: 'active' %></li>
+            <li><%= link_to 'Charts', charts_path %></li>
+            <li><%= link_to 'Market', '#' %></li>
+          </ul>
+        </nav>
+        <div class="aux">
+          <div class="balance"><%= as_game_currency(current_manager.balance) %></div>
+          <div class="info">
+            <div class="hq">
+              <a href="#"><i class="fas fa-building"></i></a>
             </div>
-            <div class="modal-body">
-              <p>Seems the music industry got the best of you. You've lost all of your money and must file for bankruptcy! <b>Doing this will reset your account with a starting balance of <%= as_game_currency(500) %>.</b></p>
+            <div class="xp">
+              <div class="progress">
+                <span>XP</span>
+              </div>
             </div>
-            <div class="modal-footer">
-              <%= link_to "File bankruptcy & start over", file_bankruptcy_manager_path(current_manager), class: 'btn btn-danger' %>
+            <div class="avatar">
+              <%= link_to image_tag(current_manager.avatar_url), manager_path(current_manager) %>
             </div>
           </div>
         </div>
+      </header>
+      <div class="shell">
+        <div class="content">
+          <%= yield %>
+        </div>
       </div>
-      <% end %>
-      <% if notice.present? %>
-      <div class="alert alert-success" role="alert"><%= notice %></div>
-      <% end %>
-
-      <% if alert.present? %>
-      <div class="alert alert-warning" role="alert"><%= alert %></div>
-      <% end %>
-
-      <% if current_manager.present? and current_manager.low_balance? %>
-      <div class="alert alert-warning" role="alert">Your balance (<%= as_game_currency(current_manager.balance) %>) is getting low! If you drop below zero you risk going bankrupt!</div>
-      <% end %>
-
-      <% if current_manager.present? and current_manager.negative? %>
-      <div class="alert alert-danger" role="alert">Your balance has dropped below zero! If you go below <%= as_game_currency(-1000) %> you'll go bankrupt and be forced to start over!</div>
-      <% end %>
-
-      <%= yield %>
     </div>
-    <footer class="bd-footer text-muted">
-      <div class="container-fluid p-2 p-md-5">
-        <p>Got feedback? Want to contribute? <a href="https://github.com/Rockburg/rockburg">Rockburg is open source!</a></p>
-        <p>Original idea by <a href="https://twitter.com/Shpigford">@Shpigford</a>. Maintained by <a href="https://twitter.com/Shpigford">@Shpigford</a> with the help of <a href="https://github.com/rockburg/rockburg/graphs/contributors">our contributors</a>!</p>
-      </div>
+    <footer>
+      <p>Got feedback? Want to contribute? <a href="https://github.com/Rockburg/rockburg">Rockburg is open source!</a> Original idea by <a href="https://twitter.com/Shpigford">@Shpigford</a>. Maintained by <a href="https://twitter.com/Shpigford">@Shpigford</a> with the help of <a href="https://github.com/rockburg/rockburg/graphs/contributors">our contributors</a>!</p>
     </footer>
   </body>
 </html>

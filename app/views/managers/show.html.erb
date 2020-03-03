@@ -1,35 +1,25 @@
-<h1><%= image_tag @manager.avatar_url, class: 'avatar rounded float-left', width: "50px" %> <%= @manager.name %> <b class="badge badge-success"><%= as_game_currency(@manager.balance) %></b> <% if current_manager == @manager %><small><%= link_to "Edit profile", edit_manager_registration_path, class: 'float-right' %></small><% end %></h1>
-<hr>
-<h2>Bands <%= link_to "Start a new band", new_band_path, class: 'btn btn-primary btn-sm' if current_manager == @manager %></h2>
-<div class="row">
+<h1 class="heading">Your Bands <%= link_to "Start a new band", new_band_path, class: 'button' if current_manager == @manager %></h1>
+<div class="band-listing">
   <% @bands.each do |band| %>
-  <div class="col-sm-3 mb-5">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to band.name, band_path(band) %></h5>
-        <h6 class="card-subtitle mb-2 text-muted"><%= band.genre.name %> - <%= band.genre.style %></h6>
-        <p>Fans: <b><%= band.fans %></b> &bull; Buzz: <b><%= band.buzz %></b></p>
+    <%= link_to band_path(band), class: 'band' do |link| %>
+      <div class="status<% if band.activities.current_activity.try(:last) %> active<% end %>">
+        <div class="info">
+          <h3><%= band.name %></h3>
+          <h4><%= band.genre.name %>: <%= band.genre.style %></h4>
+          <h5><u><%= band.fans %></u> fans, <u><%= band.buzz %></u> buzz</h5>
+        </div>
+        <ul>
+          <% band.members.each do |member| %>
+          <li>
+            <%= image_tag member.avatar_url %>
+          </li>
+          <% end %>
+        </ul>
       </div>
       <% if band.activities.current_activity.try(:last) %>
-      <small class="card-footer endtimes text-center bg-warning text-white">
-        <%= band.activities.current_activity.try(:last).humanize_action %> for <b data-endtimes="<%= band.activities.current_activity.try(:last).ends_at %>"></b>
-      </small>
+      <div class="action"><%= band.activities.current_activity.try(:last).humanize_action %> for <u data-endtimes="<%= band.activities.current_activity.try(:last).ends_at %>"></u></div>
       <% end %>
-    </div>
-  </div>
-  <% end %>
-  <% if current_manager == @manager %>
-  <div class="col-sm-3 mb-5">
-    <div class="card">
-      <%= link_to "<i class='fa fa-user-plus' style='font-size:64px'></i><br /> Start a new band".html_safe, new_band_path, class: 'btn btn-success btn-lg card-body' %>
-    </div>
-  </div>
+    </a>
+    <% end %>
   <% end %>
 </div>
-<hr>
-<h2>Badges</h2>
-  <div class="badge-listing">
-    <% @badges.each do |badge| %>
-    <span class="badge badge-pill badge-secondary" title="<%= badge.description %>"><%= badge.name %></span>
-    <% end %>
-  </div>
