@@ -4,7 +4,9 @@
     <% if member.present? %>
       <div class="card-header"><%= member.primary_skill.name %></div>
       <div class="card-img-pad">
+      <% if member.avatar_url.present? %>
         <%= image_tag member.avatar_url, class: 'card-img-top' %>
+      <% end %>
       </div>
       <div class="card-body">
         <h5 class="card-title d-inline"><%= member.name %></h5>

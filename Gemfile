@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Framework
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 5.2.3'
 
 # Webserver
 gem 'puma'
@@ -57,7 +57,7 @@ gem 'interactor-contracts' # interface contracts for service objects
 gem 'sentry-raven' # logging
 gem 'font-awesome-rails' # icons
 gem 'figaro' # environment variables
-gem 'merit', github: 'Rockburg/merit', branch: :master # badge system
+gem 'merit'#, github: 'Rockburg/merit', branch: :master # badge system
 gem 'httparty'
 
 group :development, :test do
