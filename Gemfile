@@ -20,7 +20,6 @@ gem 'faker'
 gem 'seedbank'   # seed data organization
 
 # Frontend
-gem 'bootstrap', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
