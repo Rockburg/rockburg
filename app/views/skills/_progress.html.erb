@@ -1,5 +1,7 @@
 <% negative = negative %>
-<small><%= skill_name %>: <b><%= skill_level %></b></small>
-<div class="progress" style="height: 5px;">
-  <div class="progress-bar<% if negative.present? and negative == true %> bg-danger<% end %>" role="progressbar" style="width: <%= skill_level %>%;" aria-valuenow="<%= skill_level %>" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
+<li>
+  <span class="name"><%= skill_name %>: <strong><%= skill_level %></strong></span>
+  <div class="progress <% if negative.present? and negative == true %>negative<% else %>positive<% end %>">
+    <span style="width:<%= skill_level %>%"></span>
+  </div>
+</li>

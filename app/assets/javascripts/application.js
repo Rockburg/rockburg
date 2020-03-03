@@ -15,6 +15,16 @@
 //= require_tree .
 
 $(document).ready(function() {
+  $(".tabs a").click(function(e) {
+    e.preventDefault();
+
+    var tabid = $(this).data("tab");
+    $(".tab-content").hide();
+    $(".tabs a").removeClass("active");
+    $(this).addClass("active");
+    $("#" + tabid).show();
+  });
+
   $(".modal.bankrupt").modal({
     backdrop: "static",
     keyboard: false,
