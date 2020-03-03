@@ -31,6 +31,6 @@ class Member::AvatarURL < ApplicationService
       [k, v.sample(random: Random.new(seed + index + 1))]
     end.to_h
 
-    context.result = "https://rockburg-avataaars.herokuapp.com/?#{chosen_attributes.to_param}"
+    context.result = "https://rockburg-avataaars.onrender.com/?#{chosen_attributes.to_param}"
   end
 end
