@@ -16,7 +16,7 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>" data-id="<%= params[:id].to_i if params[:id].present? %>">
+  <body data-controller="<%= controller.controller_path %>" data-action="<%= controller.action_name %>" data-id="<%= params[:id].to_i if params[:id].present? %>" class="<% if content_for?(:body_class) %><%= yield(:body_class) %><% end %>">
     <div class="wrapper">
       <header role="banner">
         <div class="logo">
@@ -24,9 +24,14 @@
         </div>
         <nav>
           <ul>
+            <% if manager_signed_in? %>
             <li><%= link_to 'Your Bands', dashboard_path, class: 'active' %></li>
             <li><%= link_to 'Charts', charts_path %></li>
             <li><%= link_to 'Market', '#' %></li>
+            <% else %>
+            <li><%= link_to 'Sign Up', new_manager_registration_path %></li>
+            <li><%= link_to 'Log In', new_manager_session_path %></li>
+            <% end %>
           </ul>
         </nav>
         <% if manager_signed_in? %>
@@ -53,9 +58,9 @@
           <%= yield %>
         </div>
       </div>
+      <footer>
+        <p>Got feedback? Want to contribute? <a href="https://github.com/Rockburg/rockburg">Rockburg is open source!</a> Created by <a href="https://twitter.com/Shpigford">@Shpigford</a> with the help of <a href="https://github.com/rockburg/rockburg/graphs/contributors">our contributors</a>!</p>
+      </footer>
     </div>
-    <footer>
-      <p>Got feedback? Want to contribute? <a href="https://github.com/Rockburg/rockburg">Rockburg is open source!</a> Original idea by <a href="https://twitter.com/Shpigford">@Shpigford</a>. Maintained by <a href="https://twitter.com/Shpigford">@Shpigford</a> with the help of <a href="https://github.com/rockburg/rockburg/graphs/contributors">our contributors</a>!</p>
-    </footer>
   </body>
 </html>

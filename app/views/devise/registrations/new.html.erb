@@ -1,34 +1,28 @@
-<h2>Sign up</h2>
+<% content_for :body_class, "narrow auth" %>
+<h1>Sign up</h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :username %><br />
-    <%= f.text_field :name, autofocus: true, class: 'form-control form-control-lg' %>
+    <%= f.label :username %>
+    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, class: 'form-control form-control-lg' %>
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control form-control-lg' %>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control form-control-lg' %>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
 
-  <button type="submit" class="btn btn-primary">Sign up</button>
+  <button type="submit" class="button">Sign up</button>
 <% end %>
-
-<div class="my-3">
-  <%= render "devise/shared/links" %>
-</div>

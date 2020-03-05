@@ -41,9 +41,26 @@ a {
   color: $teal;
 }
 
+.narrow {
+  .wrapper {
+    max-width: 500px;
+  }
+  .shell {
+    .content {
+      padding: 40px;
+    }
+  }
+}
+
 .wrapper {
   max-width: 1300px;
   margin: 0 auto;
+}
+
+.auth {
+  h1 {
+    margin: 0 0 15px 0;
+  }
 }
 
 header[role="banner"] {
@@ -91,6 +108,7 @@ header[role="banner"] {
       display: inline-block;
       font-weight: bold;
       font-size: 1.2em;
+      border-top: 3px solid transparent;
       &.active {
         border-top: 3px solid $blue;
       }
@@ -201,7 +219,6 @@ header[role="banner"] {
   background: white;
   border-radius: 20px;
   width: 100%;
-  min-height: 500px;
 }
 
 .content {
@@ -223,15 +240,16 @@ header[role="banner"] {
 }
 
 .button {
-  padding: 5px 15px;
+  padding: 8px 15px;
   border-radius: 8px;
   color: white;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1.2em;
   background: $blue;
   border: 3px solid darken(desaturate($blue, 15%), 5%);
   box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 5%);
+  cursor: pointer;
   &:hover {
     background: darken($blue, 5%);
     border: 3px solid darken(desaturate($blue, 15%), 10%);
@@ -769,9 +787,66 @@ section.gigs {
   }
 }
 
+form {
+  .form-group,
+  .form-check {
+    margin-bottom: 20px;
+    label {
+      margin-bottom: 5px;
+      display: block;
+    }
+    input:not([type="checkbox"]) {
+      box-sizing: border-box;
+      width: 100%;
+      font-size: 1.2em;
+      border: 0;
+      background: $lightgray;
+      border: 2px solid $lightgray;
+      padding: 8px 10px;
+      border-radius: 5px;
+      outline: none;
+      &:focus {
+        border: 2px solid $green;
+        outline: none;
+      }
+    }
+  }
+  .form-check {
+    label {
+      display: inline;
+    }
+  }
+}
+
+#error_explanation {
+  background: $red;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  color: white;
+  border: 3px solid darken(desaturate($red, 15%), 5%);
+  box-shadow: 0 3px 0 darken(desaturate($red, 15%), 5%);
+  h2,
+  ul {
+    margin: 0;
+  }
+  h2 {
+    font-size: 1.1em;
+  }
+}
+
 .tab-content {
   display: none;
   &.active {
     display: block;
+  }
+}
+
+footer {
+  padding: 0 20px;
+  font-size: 0.9em;
+  line-height: 1.2em;
+  a {
+    color: $green;
   }
 }
