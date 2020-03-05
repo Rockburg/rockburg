@@ -29,6 +29,7 @@
             <li><%= link_to 'Market', '#' %></li>
           </ul>
         </nav>
+        <% if manager_signed_in? %>
         <div class="aux">
           <div class="balance"><%= as_game_currency(current_manager.balance) %></div>
           <div class="info">
@@ -45,6 +46,7 @@
             </div>
           </div>
         </div>
+        <% end %>
       </header>
       <div class="shell">
         <div class="content">

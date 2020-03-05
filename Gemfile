@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.3'
+ruby '2.7.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 # Framework
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 6.0'
 
 # Webserver
 gem 'puma'
@@ -85,6 +85,7 @@ group :development do
   gem 'hirb', github: 'bsharpe/hirb', branch: :master # nice record display in console
   gem 'rubocop', require: false # style cop
   gem 'foreman', require: false # running background workers
+  gem 'listen'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
