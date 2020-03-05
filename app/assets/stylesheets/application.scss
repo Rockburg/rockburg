@@ -63,6 +63,16 @@ a {
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
 header[role="banner"] {
   display: grid;
   grid-template-columns: 2fr 8fr 1fr;
@@ -222,6 +232,7 @@ header[role="banner"] {
 }
 
 .content {
+  padding: 40px;
   &:after {
     content: "";
     clear: both;
@@ -231,7 +242,6 @@ header[role="banner"] {
 
 .heading {
   margin: 0;
-  padding: 20px 40px 20px 40px;
   .button {
     font-size: 0.5em;
     position: relative;
@@ -262,7 +272,7 @@ header[role="banner"] {
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  padding: 0 40px 40px;
+  padding: 0;
   .band {
     text-decoration: none;
     color: $black;
@@ -788,6 +798,7 @@ section.gigs {
 }
 
 form {
+  margin-top: 20px;
   .form-group,
   .form-check {
     margin-bottom: 20px;
