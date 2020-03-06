@@ -5,24 +5,23 @@
     <div class="member_list">
     <% members.each do |member| %>
     <div class="member">
-
-      <div class="card-img-pad">
-        <%= image_tag member.avatar_url, class: 'card-img-top' %>
+      <div class="avatar">
+        <%= image_tag member.avatar_url %>
       </div>
-      <div class="card-body">
-        <h5 class="card-title"><%= member.name %></h5>
-        <h4 class="text-success"><%= as_game_currency(member.cost_generator) %><small>/day</small></h4>
-        <%= render partial: "progress", locals: {skill_name: "Instrument", skill_level: member.skill_primary_level} %>
-        <%= render partial: "progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %>
-        <%= render partial: "progress", locals: {skill_name: "Looks", skill_level: member.trait_looks} %>
-        <%= render partial: "progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %>
-
-      </div>
-      <div class="card-footer text-center">
-        <%= link_to "Hire: <b>#{as_game_currency(member.cost_generator)}<small>/day</small></b>".html_safe, hire_band_skill_member_path(band_id: band.id, skill_id: skill.id, id: member.id), class: 'btn btn-primary' %>
-      </div>
-
       
+      <div class="details">
+        <h4><%= member.name %></h4>
+        <h5><%= as_game_currency(member.cost_generator) %><small>/day</small></h5>
+        <ul class="skill_list">
+          <%= render partial: "progress", locals: {skill_name: "Instrument", skill_level: member.skill_primary_level} %>
+          <%= render partial: "progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %>
+          <%= render partial: "progress", locals: {skill_name: "Looks", skill_level: member.trait_looks} %>
+          <%= render partial: "progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %>
+        </ul>
+        <div class="hire_footer">
+          <%= link_to "Hire: <b>#{as_game_currency(member.cost_generator)}<small>/day</small></b>".html_safe, hire_band_skill_member_path(band_id: band.id, skill_id: skill.id, id: member.id), class: 'button' %>
+        </div>
+      </div>      
     </div>
     <% end %>
     </div>

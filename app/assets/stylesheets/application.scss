@@ -890,6 +890,65 @@ form {
       }
     }
   }
+  .member {
+    .avatar {
+      text-align: center;
+      background: $blue;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      padding-top: 10px;
+      img {
+        margin-bottom: -3px;
+        overflow: hidden;
+      }
+    }
+    .details {
+      padding: 10px 15px;
+      background: $lightgray;
+      h4 {
+        font-size: 1.4em;
+        text-align: center;
+      }
+      h5 {
+        font-size: 1.2em;
+        text-align: center;
+      }
+    }
+    .skill_list {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      li {
+        margin-bottom: 8px;
+      }
+      .name {
+        margin-bottom: 3px;
+        display: block;
+      }
+      .progress {
+        border-radius: 100px;
+        display: block;
+        background: $gray;
+        height: 8px;
+        span {
+          display: block;
+          height: 100%;
+          border-top-left-radius: 100px;
+          border-bottom-left-radius: 100px;
+        }
+        &.positive span {
+          background: $green;
+        }
+        &.negative span {
+          background: $red;
+        }
+      }
+    }
+    .hire_footer {
+      text-align: center;
+      margin: 35px 0 25px 0;
+    }
+  }
 }
 
 footer {
