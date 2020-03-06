@@ -1,3 +1,4 @@
+<% if @band.genre.min_members <= @band.members.count %>
 <section class="profile-header band-profile">
   <div class="info">
     <div class="band-avatar">
@@ -28,7 +29,6 @@
     </div>
   </div>
 </section>
-<% if @band.genre.min_members <= @band.members.count %>
 <section class="actions">
   <div class="action_items">
     <a href="#"
@@ -153,4 +153,14 @@
     </div>
   </div>
 </section>
+<% else %>
+<div class="start">
+  <h1><%=@band.name%> is very <%= @band.genre.style %> <%= @band.genre.name %> of you!</h1>
+  <h2>Time to add the founding members!</h2>
+  <div class="hire_members">
+    <div class="allmembers">
+      <%= render template: "bands/allmembers"  %>
+    </div>
+  </div>
+</div>
 <% end %>
