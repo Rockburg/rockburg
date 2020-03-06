@@ -35,6 +35,8 @@ gem 'pundit'
 
 # Background Processing
 gem 'sidekiq'
+gem 'e2mmap'
+gem 'thwait' # Needed for sidekiq-scheduler dependency
 gem 'sidekiq-scheduler'
 gem 'sidekiq-failures', github: 'bsharpe/sidekiq-failures', branch: :master
 gem 'sidekiq-global_id'

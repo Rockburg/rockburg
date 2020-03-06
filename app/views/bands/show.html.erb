@@ -28,6 +28,7 @@
     </div>
   </div>
 </section>
+<% if @band.genre.min_members <= @band.members.count %>
 <section class="actions">
   <div class="action_items">
     <a href="#"
@@ -152,3 +153,4 @@
     </div>
   </div>
 </section>
+<% end %>

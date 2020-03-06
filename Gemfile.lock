@@ -427,6 +427,7 @@ DEPENDENCIES
   colorize
   devise!
   dotiw
+  e2mmap
   ensurance
   factory_bot_rails
   faker
@@ -463,6 +464,7 @@ DEPENDENCIES
   sidekiq-failures!
   sidekiq-global_id
   sidekiq-scheduler
+  thwait
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
