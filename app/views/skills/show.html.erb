@@ -1,10 +1,11 @@
-<h1>Hire <b><u><%= skill.name %></u></b> for <b><u><%= band.name %></u></b></h1>
+<div class="start">
+  <h1>Hire <b><u><%= skill.name %></u></b> for <b><u><%= band.name %></u></b></h1>
+  <h2>Every member has a unique skillsets and traits that all affect how your band functions.</h2>
+  <div class="members">
+    <div class="member_list">
+    <% members.each do |member| %>
+    <div class="member">
 
-<div class="row">
-  <% members.each do |member| %>
-
-  <div class="col-sm-3 mb-5">
-    <div class="card">
       <div class="card-img-pad">
         <%= image_tag member.avatar_url, class: 'card-img-top' %>
       </div>
@@ -20,8 +21,10 @@
       <div class="card-footer text-center">
         <%= link_to "Hire: <b>#{as_game_currency(member.cost_generator)}<small>/day</small></b>".html_safe, hire_band_skill_member_path(band_id: band.id, skill_id: skill.id, id: member.id), class: 'btn btn-primary' %>
       </div>
+
+      
+    </div>
+    <% end %>
     </div>
   </div>
-
-  <% end %>
 </div>

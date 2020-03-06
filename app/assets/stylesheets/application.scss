@@ -265,6 +265,12 @@ header[role="banner"] {
     border: 3px solid darken(desaturate($blue, 15%), 10%);
     box-shadow: 0 3px 0 darken(desaturate($blue, 15%), 10%);
   }
+  &.button-small {
+    font-size: 1em;
+    padding: 4px 10px;
+    border-width: 2px;
+    box-shadow: 0 2px 0 darken(desaturate($blue, 15%), 10%);
+  }
 }
 
 .band-listing {
@@ -857,6 +863,32 @@ form {
   h1,
   h2 {
     text-align: center;
+    margin-bottom: 5px;
+  }
+}
+
+.members {
+  margin-top: 20px;
+  .member_list {
+    display: grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: 2fr 2fr 2fr 2fr;
+    .to_hire {
+      background: $skyblue;
+      border-radius: 5px;
+      border-style: dashed;
+      border-color: $bluegray;
+      text-align: center;
+      padding: 20px 10px 25px 10px;
+      h4 {
+        font-size: 1.5em;
+        margin: 0 0 20px 0;
+      }
+      .button {
+        font-size: 1em;
+      }
+    }
   }
 }
 

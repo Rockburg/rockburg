@@ -157,8 +157,8 @@
 <div class="start">
   <h1><%=@band.name%> is very <%= @band.genre.style %> <%= @band.genre.name %> of you!</h1>
   <h2>Time to add the founding members!</h2>
-  <div class="hire_members">
-    <div class="allmembers">
+  <div class="members">
+    <div class="member_list">
       <%= render template: "bands/allmembers"  %>
     </div>
   </div>
