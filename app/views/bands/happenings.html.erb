@@ -1,10 +1,14 @@
+<ol>
 <% @band.activities.where('ends_at < ?', Time.now).limit(20).order('ends_at desc').each do |activity| %>
-<li>
-  <strong class="activity"><%= activity.humanize_past_action %> <small><%= time_ago_in_words(activity.created_at, vague: true) %> ago</small></strong>
-  <ul>
+<li class="event">
+  <time><span><%= activity.humanize_past_action %> <%= time_ago_in_words(activity.created_at, vague: true) %> ago</span></time>
+  <ol>
     <% activity.happenings.each do |happening| %>
-    <li class="<%= happening.kind %>"><%= happening.what %></li>
+    <li class="<%= happening.kind %>">
+      <%= happening.what %>
+    </li>
     <% end %>
-  </ul>
+  </ol>
 </li>
 <% end %>
+</ol>

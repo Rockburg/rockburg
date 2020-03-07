@@ -364,11 +364,17 @@ header[role="banner"] {
     background: $bluegray;
     padding-top: 30px;
     .band-avatar {
-      place-self: end start;
+      place-self: stretch center;
       ul.band-members {
         margin: 0 0 -3px 0;
         padding: 0;
         list-style: none;
+        text-align: center;
+        &[data-member-count="1"] {
+          img {
+            width: 70%;
+          }
+        }
 
         > li {
           display: inline;
@@ -705,25 +711,30 @@ section.activities {
       }
     }
     .news {
-      padding: 20px 0 0 10px;
+      padding: 20px 0 0 0;
       ol {
         margin: 0;
         padding: 0;
         list-style: none;
-        font-size: 0.75em;
+        font-size: 0.8em;
         .event {
           position: relative;
           time {
-            background: white;
-            padding-right: 5px;
+            font-size: 1.2em;
+            span {
+              position: relative;
+              z-index: 10;
+              background: white;
+              padding-right: 5px;
+            }
             &:before {
               display: block;
               position: absolute;
               border-bottom: 1px solid $gray;
               width: 100%;
               height: 1px;
-              top: 8px;
-              z-index: -100;
+              top: 9px;
+              z-index: 0;
               content: "";
             }
           }
@@ -813,6 +824,14 @@ section.gigs {
   }
 }
 
+section.member_management {
+  padding: 0 30px 30px 30px;
+  h5 {
+    font-size: 1.7em;
+    margin: 0 0 10px 0;
+  }
+}
+
 form {
   margin-top: 20px;
   .form-group,
@@ -877,7 +896,8 @@ form {
   }
 }
 
-.members {
+.members,
+.member_management {
   margin-top: 20px;
   .member_list {
     display: grid;

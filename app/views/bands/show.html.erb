@@ -2,12 +2,12 @@
 <section class="profile-header band-profile">
   <div class="info">
     <div class="band-avatar">
-      <ul class="band-members">
+      <ul class="band-members" data-member-count="<%= @band.members.count %>">
         <% @band.members.each do |member| %>
         <li>
           <%= image_tag member.avatar_url %>
 
-          <div class="tooltip">
+          <!--<div class="tooltip">
             <h6><%= member.name %></h6>
             <ul class="skills">
               <%= render partial: "skills/progress", locals: {skill_name: member.primary_skill.name, skill_level: member.skill_primary_level} %>
@@ -16,7 +16,7 @@
               <%= render partial: "skills/progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %>
               <%= render partial: "skills/progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %>
             </ul>
-          </div>
+          </div>-->
 
         </li>
         <% end %>
@@ -112,38 +112,7 @@
       </ul>
     </nav>
     <div class="tab-content news active" id="tab-news">
-      <ol>
-        <li class="event">
-          <time>Less than 1 minute ago</time>
-          <ol>
-            <li class="type-positive">
-              Sandy C. Shore's skill increased by 1
-            </li>
-            <li class="type-negative">
-              Sandy C. Shore's fatigue increased by 2
-            </li>
-          </ol>
-        </li>
-        <li class="event">
-          <time>19 hours ago</time>
-          <ol>
-            <li class="type-positive">
-              Sandy C. Shore's fatigue decreased by 100
-            </li>
-          </ol>
-        </li>
-        <li class="event">
-          <time>20 hours ago</time>
-          <ol>
-            <li class="type-positive">
-              You gained 15 new fans and 100 buzz at your gig!
-            </li>
-            <li class="type-positive">
-              You made §500 from 50 people at your gig!
-            </li>
-          </ol>
-        </li>
-      </ol>
+      <%= render template: "bands/happenings" %>
     </div>
     <div class="tab-content songs" id="tab-songs">
       YO SONGS
@@ -151,6 +120,33 @@
     <div class="tab-content recordings" id="tab-recordings">
       YO RECORDINGS
     </div>
+  </div>
+</section>
+<section class="member_management">
+  <h5>Members</h5>
+  <div class="member_list">
+    <% @band.genre.skills.each do |genre_skill| %>
+    <% member = @band.members.with_skill(genre_skill).first %>
+    <div class="member">
+      <div class="avatar">
+        <%= image_tag member.avatar_url %>
+      </div>
+      
+      <div class="details">
+        <h4><%= member.name %></h4>
+        <h5><%= as_game_currency(member.cost_generator) %><small>/day</small></h5>
+        <ul class="skill_list">
+          <%= render partial: "skills/progress", locals: {skill_name: "Instrument", skill_level: member.skill_primary_level} %>
+          <%= render partial: "skills/progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %>
+          <%= render partial: "skills/progress", locals: {skill_name: "Looks", skill_level: member.trait_looks} %>
+          <%= render partial: "skills/progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %>
+        </ul>
+        <div class="hire_footer">
+          <%= link_to("Fire this member", member_path(member_id: member, band_id: @band), method: :delete, data: { confirm: "Are you sure you want to fire #{member.name}?" }, class: 'button button-small button-danger') if manager_signed_in? and @band.manager == current_manager %>
+        </div>
+      </div>      
+    </div>
+    <% end %>
   </div>
 </section>
 <% else %>
