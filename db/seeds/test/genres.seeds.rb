@@ -40,9 +40,6 @@ seed_data = [
   { name: "Soul", style: "Funk", min_members: 5, max_members: 7,
     skills: %w[Acoustic_Guitar Bass_Guitar Drummer Keyboards Vocals Horns Wind Percussion Backup_Vocals]
   },
-  { name: "Vocalist", style: "Barbership Quartet", min_members: 4, max_members: 4,
-    skills: %w[Vocals]
-  },
   { name: "Vocalist", style: "Solo", min_members: 1, max_members: 1,
     skills: %w[Vocals]
   }

@@ -1,24 +1,17 @@
 <% member = @member if @member.present? %>
 <% if member.present? %>
-  <div class="card-header"><%= member.primary_skill.name %></div>
-  <div class="card-img-pad">
-  <% if member.avatar_url.present? %>
-    <%= image_tag member.avatar_url, class: 'card-img-top' %>
-  <% end %>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title d-inline"><%= member.name %></h5>
-    <% if manager_signed_in? and member.bands.first.manager == current_manager %>
-    <%= link_to member_path(member_id: member, band_id: @band), method: :delete, data: { confirm: "Are you sure you want to fire #{member.name}?" } do %>
-      <h5 class="d-inline float-right"><%= fa_icon 'ban', class: 'text-danger' %></h5>
+  <div class="hired">
+    <h4><%= member.primary_skill.name %></h4>
+    <div class="avatar">
+    <% if member.avatar_url.present? %>
+      <%= image_tag member.avatar_url, class: 'card-img-top' %>
     <% end %>
-    <% end %>
-    <h4 class="text-success"><%= as_game_currency(member.cost_generator) %><small>/day</small></h4>
-    <%= render partial: "skills/progress", locals: {skill_name: member.primary_skill.name, skill_level: member.skill_primary_level} %>
-    <%= render partial: "skills/progress", locals: {skill_name: "Fatigue", skill_level: member.trait_fatigue, negative: true} %>
-    <%= render partial: "skills/progress", locals: {skill_name: "Looks", skill_level: member.trait_looks} %>
-    <%= render partial: "skills/progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %>
-    <%= render partial: "skills/progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %>
+    </div>
+    <div class="details">
+      <h4><%= member.name %></h4>
+      <h5><%= as_game_currency(member.cost_generator) %><small>/day</small></h5>
+      <%= link_to("Fire this member", member_path(member_id: member, band_id: @band), method: :delete, data: { confirm: "Are you sure you want to fire #{member.name}?" }, class: 'button button-small button-danger') if manager_signed_in? and @band.manager == current_manager %>
+    </div>
   </div>
 <% else %>
   <div class="to_hire">

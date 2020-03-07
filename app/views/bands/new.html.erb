@@ -7,7 +7,7 @@
   </div>
   <div class="form-group">
     <%= f.label :genre %>
-    <%= f.collection_select :genre_id, Genre.all.order(:name), :id, :full_genre, {include_blank: true}, {class: 'form-control'} %>
+    <%= f.collection_select :genre_id, Genre.all.order(:name, :style), :id, :full_genre, {include_blank: true}, {class: 'form-control'} %>
   </div>
   <%= f.submit "Start your band", class: 'button' %>
 <% end %>

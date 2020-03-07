@@ -271,6 +271,16 @@ header[role="banner"] {
     border-width: 2px;
     box-shadow: 0 2px 0 darken(desaturate($blue, 15%), 10%);
   }
+  &.button-danger {
+    background: $red;
+    border: 3px solid darken(desaturate($red, 15%), 5%);
+    box-shadow: 0 3px 0 darken(desaturate($red, 15%), 5%);
+    &:hover {
+      background: darken($red, 5%);
+      border: 3px solid darken(desaturate($red, 15%), 10%);
+      box-shadow: 0 3px 0 darken(desaturate($red, 15%), 10%);
+    }
+  }
 }
 
 .band-listing {
@@ -874,7 +884,8 @@ form {
     grid-column-gap: 15px;
     grid-row-gap: 15px;
     grid-template-columns: 2fr 2fr 2fr 2fr;
-    .to_hire {
+    .to_hire,
+    .hired {
       background: $skyblue;
       border-radius: 5px;
       border-style: dashed;
@@ -887,6 +898,31 @@ form {
       }
       .button {
         font-size: 1em;
+      }
+    }
+    .hired {
+      .avatar {
+        img {
+          box-sizing: border-box;
+          border-radius: 500px;
+          background: $blue;
+          max-width: 80%;
+        }
+      }
+      .details {
+        h4,
+        h5 {
+          margin: 0;
+        }
+        h4 {
+          font-size: 1.4em;
+          text-align: center;
+        }
+        h5 {
+          font-size: 1.2em;
+          text-align: center;
+          margin-bottom: 20px;
+        }
       }
     }
   }

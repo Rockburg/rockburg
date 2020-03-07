@@ -20,10 +20,10 @@ class Genre < ApplicationRecord
 
   def full_genre
     result = "#{name} - #{style} ("
-    if max_members == 1
+    if total_members == 1
       result << "1 member"
     else
-      result << "#{min_members}-#{max_members} members"
+      result << "#{total_members} members"
     end
     result << ")"
     result
