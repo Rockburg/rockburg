@@ -4,7 +4,6 @@ class ManagersController < ApplicationController
   def index
     @manager = current_manager
     @bands = policy_scope(Band).where(manager_id: current_manager.id).all.order(:name)
-    @badges = current_manager.badges
 
     render(:action => 'show')
   end
@@ -12,7 +11,6 @@ class ManagersController < ApplicationController
   def show
     @manager = authorize(policy_scope(Manager).find(params[:id]))
     @bands = @manager.bands.all
-    @badges = @manager.badges
   end
 
   def edit

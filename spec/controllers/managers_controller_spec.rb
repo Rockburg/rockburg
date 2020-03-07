@@ -28,11 +28,6 @@ RSpec.describe ManagersController, type: :controller do
       subject
       expect(assigns(:bands)).to eq current_manager.bands.all
     end
-
-    it 'should set your badges' do
-      subject
-      expect(assigns(:badges)).to eq current_manager.badges
-    end
   end
 
   context '#show' do

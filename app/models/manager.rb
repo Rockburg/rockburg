@@ -30,8 +30,6 @@
 #
 
 class Manager < ApplicationRecord
-  has_merit
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -52,7 +50,6 @@ class Manager < ApplicationRecord
 
   ## -- CALLBACKS
   after_create :give_starting_balance
-  after_create :give_badge
 
   ## — INSTANCE METHODS
   def to_param
@@ -62,10 +59,6 @@ class Manager < ApplicationRecord
   def give_starting_balance
     self.financials.create!(amount: 500) if !self.financials.exists?
     self.update_balance
-  end
-
-  def give_badge
-    self.add_badge(1)
   end
 
   def update_balance
