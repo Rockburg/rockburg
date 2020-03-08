@@ -36,7 +36,7 @@
         </nav>
         <% if manager_signed_in? %>
         <div class="aux">
-          <div class="balance"><%= as_game_currency(current_manager.balance) %></div>
+          <div class="balance data-balance"><%= as_game_currency(current_manager.balance) %></div>
           <div class="info">
             <div class="hq">
               <a href="#"><i class="fas fa-building"></i></a>

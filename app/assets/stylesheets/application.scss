@@ -521,6 +521,19 @@ header[role="banner"] {
   }
 }
 
+.current_activity {
+  background: $teal;
+  margin: 20px;
+  padding: 5px;
+  border-radius: 8px;
+  color: $white;
+  text-align: center;
+  font-size: 1.4em;
+  b {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
 .actions {
   background: #f5fbfc;
   margin: 20px;
@@ -544,11 +557,16 @@ header[role="banner"] {
     a {
       color: white;
       text-decoration: none;
-      background: $green;
+      background: lighten($green, 15%);
       padding: 20px 15px;
       border-radius: 8px;
-      border: 3px solid darken(desaturate($green, 15%), 5%);
-      box-shadow: 0 3px 0 darken(desaturate($green, 15%), 5%);
+      border: 3px solid lighten(desaturate($green, 15%), 5%);
+      box-shadow: 0 3px 0 lighten(desaturate($green, 15%), 5%);
+      &.active {
+        background: $green;
+        border: 3px solid darken(desaturate($green, 15%), 5%);
+        box-shadow: 0 3px 0 darken(desaturate($green, 15%), 5%);
+      }
       &:hover {
         background: darken($green, 5%);
         border: 3px solid darken(desaturate($green, 15%), 10%);
@@ -567,7 +585,9 @@ header[role="banner"] {
     grid-column: 2;
     // grid-row: row;
     text-align: center;
-
+    .choice {
+      display: none;
+    }
     h4 {
       margin: 0;
       padding: 0;

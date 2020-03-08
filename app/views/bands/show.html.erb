@@ -25,46 +25,67 @@
     <div class="about">
       <h1><%= @band.name %></h1>
       <h2><%= @band.genre.name %>: <%= @band.genre.style %></h2>
-      <h3><u><%= @band.fans %></u> fans, <u><%= @band.buzz %></u> buzz</h3>
+      <h3><u class="data-fans"><%= @band.fans %></u> fans, <u class="data-buzz"><%= @band.buzz %></u> buzz</h3>
     </div>
   </div>
 </section>
+<% if @activity %>
+  <section class="current_activity">
+    <p>Currently: <%= @activity.humanize_action %> for <b data-endtimes="<%= @activity.ends_at %>"></b></p>
+  </section>
+  <% end %>
 <section class="actions">
   <div class="action_items">
-    <a href="#"
-      ><b>Practice</b>
-      <span>Improves the skill level of each member</span></a
-    >
-    <a href="#"><b>Gig</b> <span>Gain fans and make money</span></a>
-    <a href="#"
+    <a href="#" class="active" data-choice="practice">
+      <b>Practice</b>
+      <span>Improves the skill level of each member</span>
+    </a>
+    <a href="#" class="active"><b>Gig</b> <span>Gain fans and make money</span></a>
+    <a href="#" class="active"
       ><b>Write</b> <span>Needed to play gigs and grow fans</span></a
     >
-    <a href="#"
-      ><b>Record</b> <span>Gets a song ready to release</span></a
+    <a href="#" class="active"><b>Record</b> <span>Gets a song ready to release</span></a
     >
-    <a href="#"
+    <a href="#" class="active"
       ><b>Promote</b>
       <span>Create videos, do interviews, press & more!</span></a
     >
-    <a href="#"
-      ><b>Rest</b>
-      <span>Too fatigued? Rest, or bad things will happen</span></a
-    >
+    <a href="#" class="active" data-choice="rest">
+      <b>Rest</b>
+      <span>Too fatigued? Rest, or bad things will happen</span>
+    </a>
   </div>
   <div class="choices">
-    <h4>How long would you like to practice?</h4>
-    <h5>
-      The longer you practice the more skill points you may receive
-    </h5>
-    <ul>
-      <li><a href="#">5 minutes</a></li>
-      <li><a href="#">15 minutes</a></li>
-      <li><a href="#">30 minutes</a></li>
-      <li><a href="#">1 hour</a></li>
-    </ul>
+    <div class="choice" data-choice="practice">
+      <h4>How long would you like to practice?</h4>
+      <h5>
+        The longer you practice the more skill points you may receive
+      </h5>
+      <ul>
+        <li>
+          <%= link_to "5 minutes", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '5') %>
+        </li>
+        <li><%= link_to "15 minutes", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '15') %></li>
+        <li><%= link_to "30 minutes", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '30') %></li>
+        <li><%= link_to "1 hour", new_band_activity_path(band_id: @band.id, type: 'practice', hours: '60') %></li>
+      </ul>
+    </div>
+    <div class="choice" data-choice="rest">
+      <h4>How long would you like to rest?</h4>
+      <h5>
+        Resting reduces fatigue and prevents mistakes.
+      </h5>
+      <ul>
+        <li><%= link_to "5 minutes", new_band_activity_path(band_id: @band.id, type: 'rest', hours: '5') %></li>
+        <li><%= link_to "15 minutes", new_band_activity_path(band_id: @band.id, type: 'rest', hours: '15') %></li>
+        <li><%= link_to "30 minutes", new_band_activity_path(band_id: @band.id, type: 'rest', hours: '30') %></li>
+        <li><%= link_to "1 hour", new_band_activity_path(band_id: @band.id, type: 'rest', hours: '60') %></li>
+      </ul>
+    </div>
   </div>
 </section>
 <section class="activities">
+  <!--
   <div class="releases">
     <div class="latest">
       <h5>Latest Release</h5>
@@ -101,19 +122,23 @@
       </div>
     </div>
   </div>
+  -->
   <div class="items">
     <nav>
       <ul class="tabs">
         <li>
           <a href="#" class="active" data-tab="tab-news">News</a>
         </li>
+        <!--
         <li><a href="#" data-tab="tab-songs">Songs</a></li>
         <li><a href="#" data-tab="tab-recordings">Recordings</a></li>
+        -->
       </ul>
     </nav>
     <div class="tab-content news active" id="tab-news">
       <%= render template: "bands/happenings" %>
     </div>
+    
     <div class="tab-content songs" id="tab-songs">
       YO SONGS
     </div>
@@ -140,6 +165,7 @@
           <%= render partial: "skills/progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %>
           <%= render partial: "skills/progress", locals: {skill_name: "Looks", skill_level: member.trait_looks} %>
           <%= render partial: "skills/progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %>
+          <%= render partial: "skills/progress", locals: {skill_name: "Fatigue", skill_level: member.trait_fatigue, negative: true} %>
         </ul>
         <div class="hire_footer">
           <%= link_to("Fire this member", member_path(member_id: member, band_id: @band), method: :delete, data: { confirm: "Are you sure you want to fire #{member.name}?" }, class: 'button button-small button-danger') if manager_signed_in? and @band.manager == current_manager %>

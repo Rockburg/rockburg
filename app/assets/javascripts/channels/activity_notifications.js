@@ -8,8 +8,11 @@
 //   received: (data) ->
 //     # Called when there's incoming data on the websocket for this channel
 
-App.notifications = App.cable.subscriptions.create("ActivityNotificationsChannel", {
-  connected: function() {},
-  disconnected: function() {},
-  received: function() {}
-});
+App.notifications = App.cable.subscriptions.create(
+  "ActivityNotificationsChannel",
+  {
+    connected: function() {},
+    disconnected: function() {},
+    received: function() {}
+  }
+);

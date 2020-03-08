@@ -25,11 +25,21 @@ $(document).ready(function() {
     $("#" + tabid).show();
   });
 
-  $(".modal.bankrupt").modal({
-    backdrop: "static",
-    keyboard: false,
-    show: true
+  $(".action_items a").click(function(e) {
+    e.preventDefault();
+
+    var tabid = $(this).data("choice");
+    $(".choice").hide();
+    $(".action_items a").removeClass("active");
+    $(this).addClass("active");
+    $(".choices [data-choice=" + tabid).show();
   });
+
+  // $(".modal.bankrupt").modal({
+  //   backdrop: "static",
+  //   keyboard: false,
+  //   show: true
+  // });
 
   $("[data-endtimes]").each(function() {
     var $this = $(this),
