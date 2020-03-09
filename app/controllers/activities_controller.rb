@@ -54,8 +54,6 @@ class ActivitiesController < ApplicationController
       raise ArgumentError.new("Unknown Type[#{params[:type]}]")
     end
 
-    Rails.logger.warn("CONTEXT: #{context}")
-    Rails.logger.warn("CONTEXT SUCCESS: #{context.success?}")
     if context && context.success?
       authorize(context.activity, "#{params[:type]}?")
 

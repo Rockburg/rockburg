@@ -19,18 +19,20 @@
   <section class="current_activity">
     <p>Currently: <%= @activity.humanize_action %> for <b data-endtimes="<%= @activity.ends_at %>"></b></p>
   </section>
-  <% end %>
+<% end %>
+<% if @band.overly_fatigued_members? %>
+<section class="fatigued">
+  <p>Your band is too fatigued to do anything but rest!</p>
+</section>
+<% end %>
 <section class="actions">
   <div class="action_items">
-    <a href="#" class="active" data-choice="practice"><b>Practice</b><span>Improves the skill level of each member</span></a>
-    <a href="#" class="active" data-choice="gig"><b>Gig</b> <span>Gain fans and make money</span></a>
-    <a href="#" class="active" data-choice="write_song"><b>Write</b> <span>Needed to record and grow fans</span></a>
-    <a href="#" class="active" data-choice="record"><b>Record</b> <span>Gets a song ready to release</span></a
+    <a href="#" class="active<% if @band.overly_fatigued_members? %> disabled<% end %>" data-choice="practice"><b>Practice</b><span>Improves the skill level of each member</span></a>
+    <a href="#" class="active<% if @band.overly_fatigued_members? %> disabled<% end %>" data-choice="gig"><b>Gig</b> <span>Gain fans and make money</span></a>
+    <a href="#" class="active<% if @band.overly_fatigued_members? %> disabled<% end %>" data-choice="write_song"><b>Write</b> <span>Needed to record and grow fans</span></a>
+    <a href="#" class="active<% if @band.overly_fatigued_members? %> disabled<% end %>" data-choice="record"><b>Record</b> <span>Gets a song ready to release</span></a
     >
-    <a href="#" class="active"
-      ><b>Promote</b>
-      <span>Create videos, do interviews, press & more!</span></a
-    >
+    <a href="#" class="active<% if @band.overly_fatigued_members? %> disabled<% end %>"><b>Promote</b><span>Create videos, do interviews, press & more!</span></a>
     <a href="#" class="active" data-choice="rest">
       <b>Rest</b>
       <span>Too fatigued? Rest, or bad things will happen</span>
@@ -92,14 +94,8 @@
       <%= form_tag("/bands/#{@band.id}/activities/new", method: "get") do %>
       <%= hidden_field_tag 'type', 'record_single' %>
       <div class="form-group">
-        <% @band.songs.each do |song| %>
-        <div class="form-check">
-          <%= radio_button_tag(:song_id, song.id, false, class: '') %>
-          <label class="form-check-label">
-            <%= song.name %> (Quality: <%= song.quality %>)
-          </label>
-        </div>
-        <% end %>
+        <h6>Select a song to record</h6>
+        <%= select_tag :song_id, options_from_collection_for_select(@band.songs, :id, :full_song), class: 'form-control' %>
       </div>
       <div class="form-group">
         <h6>Select a studio to record at</h6>

@@ -18,4 +18,8 @@
 class Song < ApplicationRecord
   belongs_to :band
   has_many :recordings
+
+  def full_song
+    "#{name} - Quality: #{quality}"
+  end
 end

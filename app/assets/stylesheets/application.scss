@@ -79,6 +79,11 @@ h6 {
   padding: 0;
 }
 
+h6 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
 header[role="banner"] {
   display: grid;
   grid-template-columns: 2fr 8fr 1fr;
@@ -568,6 +573,16 @@ header[role="banner"] {
   }
 }
 
+.fatigued {
+  background: $red;
+  margin: 20px;
+  padding: 5px;
+  border-radius: 8px;
+  color: $white;
+  text-align: center;
+  font-size: 1.4em;
+}
+
 .actions {
   background: #f5fbfc;
   margin: 20px;
@@ -600,6 +615,14 @@ header[role="banner"] {
         background: $green;
         border: 3px solid darken(desaturate($green, 15%), 5%);
         box-shadow: 0 3px 0 darken(desaturate($green, 15%), 5%);
+      }
+      &.disabled,
+      &.disabled:hover {
+        cursor: not-allowed;
+        pointer-events: none;
+        background: lighten($black, 15%);
+        border: 3px solid lighten($black, 5%);
+        box-shadow: 0 3px 0 lighten($black, 5%);
       }
       &:hover {
         background: darken($green, 5%);
