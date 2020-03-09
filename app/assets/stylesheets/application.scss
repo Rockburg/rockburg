@@ -52,6 +52,12 @@ a {
   }
 }
 
+.not-as-narrow {
+  .wrapper {
+    max-width: 700px;
+  }
+}
+
 .wrapper {
   max-width: 1300px;
   margin: 0 auto;
@@ -241,7 +247,7 @@ header[role="banner"] {
 }
 
 .heading {
-  margin: 0;
+  margin: 0 0 20px 0;
   .button {
     font-size: 0.5em;
     position: relative;
@@ -280,6 +286,34 @@ header[role="banner"] {
       border: 3px solid darken(desaturate($red, 15%), 10%);
       box-shadow: 0 3px 0 darken(desaturate($red, 15%), 10%);
     }
+  }
+  &.button-success {
+    background: $green;
+    border: 3px solid darken(desaturate($green, 15%), 5%);
+    box-shadow: 0 3px 0 darken(desaturate($green, 15%), 5%);
+    &.button-small {
+      border-width: 2px;
+      box-shadow: 0 2px 0 darken(desaturate($green, 15%), 5%);
+    }
+    &:hover {
+      background: darken($green, 5%);
+      border: 3px solid darken(desaturate($green, 15%), 10%);
+      box-shadow: 0 3px 0 darken(desaturate($green, 15%), 10%);
+      &.button-small {
+        border-width: 2px;
+        box-shadow: 0 2px 0 darken(desaturate($green, 15%), 10%);
+      }
+    }
+  }
+}
+
+.regenerate {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  .rotate {
+    transition: transform 0.2s ease-in-out;
+    transform: rotate(360deg);
   }
 }
 
@@ -857,6 +891,7 @@ form {
   .form-group,
   .form-check {
     margin-bottom: 20px;
+    position: relative;
     label {
       margin-bottom: 5px;
       display: block;

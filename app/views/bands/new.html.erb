@@ -1,9 +1,11 @@
+<% content_for :body_class, "narrow not-as-narrow" %>
 <h1>Start a new band</h1>
 
 <%= form_for @band do |f| %>
   <div class="form-group">
+    <a href="#" class="regenerate button button-small button-success"><i class="fas fa-redo-alt"></i></a>
     <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control', placeholder: 'Name your band!', value: Generator.band_name %>
+    <%= f.text_field :name, class: 'form-control regenerate-field', placeholder: 'Name your band!', value: Generator.band_name %>
   </div>
   <div class="form-group">
     <%= f.label :genre %>

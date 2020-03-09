@@ -41,6 +41,19 @@ $(document).ready(function() {
   //   show: true
   // });
 
+  $(".regenerate").click(function(e) {
+    e.preventDefault();
+    $(".regenerate i").addClass("rotate");
+
+    $.get("/bands/faker", function(data) {
+      $(".regenerate-field").val(data);
+    });
+
+    setTimeout(function() {
+      $(".regenerate i").removeClass("rotate");
+    }, 500);
+  });
+
   $("[data-endtimes]").each(function() {
     var $this = $(this),
       finalDate = $(this).data("endtimes");

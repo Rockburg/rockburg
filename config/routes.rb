@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   devise_for :managers
 
   resources :bands do
+    collection do
+      get 'faker'
+    end
     member do
       get :happenings
       get :songs

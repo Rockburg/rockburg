@@ -52,6 +52,11 @@ class BandsController < ApplicationController
     @band = policy_scope(Band).find_by(id: params[:id])
   end
 
+  def faker
+    skip_authorization
+    render plain: Generator.band_name
+  end
+
   private
 
   def band_params
