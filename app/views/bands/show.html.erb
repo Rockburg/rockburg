@@ -1,24 +1,10 @@
-<% if @band.genre.min_members <= @band.members.count %>
+<% if @band.genre.total_members <= @band.members.count %>
 <section class="profile-header band-profile">
   <div class="info">
     <div class="band-avatar">
       <ul class="band-members" data-member-count="<%= @band.members.count %>">
         <% @band.members.each do |member| %>
-        <li>
-          <%= image_tag member.avatar_url %>
-
-          <!--<div class="tooltip">
-            <h6><%= member.name %></h6>
-            <ul class="skills">
-              <%= render partial: "skills/progress", locals: {skill_name: member.primary_skill.name, skill_level: member.skill_primary_level} %>
-              <%= render partial: "skills/progress", locals: {skill_name: "Fatigue", skill_level: member.trait_fatigue, negative: true} %>
-              <%= render partial: "skills/progress", locals: {skill_name: "Looks", skill_level: member.trait_looks} %>
-              <%= render partial: "skills/progress", locals: {skill_name: "Creativity", skill_level: member.trait_creativity} %>
-              <%= render partial: "skills/progress", locals: {skill_name: "Ego", skill_level: member.trait_ego, negative: true} %>
-            </ul>
-          </div>-->
-
-        </li>
+        <li><%= image_tag member.avatar_url %></li>
         <% end %>
       </ul>
     </div>

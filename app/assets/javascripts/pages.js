@@ -1,5 +1,7 @@
 App.room = App.cable.subscriptions.create("ActivityNotificationsChannel", {
   received(data) {
+    location.reload();
+    /*
     return $(
       'body[data-controller="bands"][data-action="show"][data-id="' +
         data["band"] +
@@ -40,5 +42,6 @@ App.room = App.cable.subscriptions.create("ActivityNotificationsChannel", {
           ).load("/bands/" + data["band"] + "/allmembers");
         });
     });
+    */
   }
 });
