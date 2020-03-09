@@ -938,6 +938,8 @@ form {
 
 .tab-content {
   display: none;
+  height: 350px;
+  overflow: scroll;
   &.active {
     display: block;
   }

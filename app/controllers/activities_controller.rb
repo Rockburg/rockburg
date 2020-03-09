@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
       context = Activity::PlayGig.call(
         band: params[:band_id],
         venue: params[:venue],
-        hours: params[:hours].to_i || 2
+        hours: 120
       )
 
     when 'record_single'
@@ -55,6 +55,7 @@ class ActivitiesController < ApplicationController
     end
 
     Rails.logger.warn("CONTEXT: #{context}")
+    Rails.logger.warn("CONTEXT SUCCESS: #{context.success?}")
     if context && context.success?
       authorize(context.activity, "#{params[:type]}?")
 

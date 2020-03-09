@@ -26,7 +26,7 @@
       <b>Practice</b>
       <span>Improves the skill level of each member</span>
     </a>
-    <a href="#" class="active"><b>Gig</b> <span>Gain fans and make money</span></a>
+    <a href="#" class="active" data-choice="gig"><b>Gig</b> <span>Gain fans and make money</span></a>
     <a href="#" class="active"
       ><b>Write</b> <span>Needed to play gigs and grow fans</span></a
     >
@@ -66,6 +66,19 @@
         <li><%= link_to "15 minutes", new_band_activity_path(band_id: @band.id, type: 'rest', hours: '15') %></li>
         <li><%= link_to "30 minutes", new_band_activity_path(band_id: @band.id, type: 'rest', hours: '30') %></li>
         <li><%= link_to "1 hour", new_band_activity_path(band_id: @band.id, type: 'rest', hours: '60') %></li>
+      </ul>
+    </div>
+    <div class="choice" data-choice="gig">
+      <h4>What venue would you like to play?</h4>
+      <h5>
+        Choose a venue carefully! A high-cap venue you can't fill will hurt the perception (and future fans) of your band.
+      </h5>
+      <ul>
+        <% Venue.order('capacity ASC').each do |venue| %>
+        <li>
+          <%= link_to "#{venue.name} - #{venue.capacity} cap", new_band_activity_path(band_id: @band.id, type: 'gig', venue: venue.id) %>
+        </li>
+        <% end %>
       </ul>
     </div>
   </div>
