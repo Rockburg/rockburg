@@ -89,7 +89,7 @@
       </ul>
     </div>
     <div class="choice" data-choice="record">
-      <h4>What would you like to record?</h4>
+      <h4>What would you like to record & release?</h4>
       <h5>The song quality and studio budget have substantial impact on the final recording.</h5>
       <%= form_tag("/bands/#{@band.id}/activities/new", method: "get") do %>
       <%= hidden_field_tag 'type', 'record_single' %>
@@ -101,24 +101,28 @@
         <h6>Select a studio to record at</h6>
         <%= collection_select(:studio, :studio_id, Studio.all, :id, :full_studio, class: 'form-control') %>
       </div>
-      <%= submit_tag("Start Recording Single", class: 'button') %>
+      <p>Once you're done recording, the song will be released and star generating money...if anyone listens to it!</p>
+      <%= submit_tag("Start Recording & Releasing", class: 'button') %>
       <% end %>
     </div>
   </div>
 </section>
 <section class="activities">
-  <!--
+
   <div class="releases">
     <div class="latest">
       <h5>Latest Release</h5>
+      <%  %>
       <div class="release">
         <div class="album-art" data-seed="a" data-size="70"></div>
         <div class="details">
-          <h6>Goth Keytar <small>43</small></h6>
-          <span>April 20, 2018</span>
+          <h6><%= @band.releases.last.name %></h6>
+          <span><%= @band.releases.last.created_at.to_date %></span>
         </div>
       </div>
+
     </div>
+    <!--
     <div class="popular">
       <h5>Popular Releases</h5>
       <div class="release">
@@ -143,8 +147,9 @@
         </div>
       </div>
     </div>
+    -->
   </div>
-  -->
+
   <div class="items">
     <nav>
       <ul class="tabs">
