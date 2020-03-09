@@ -5,7 +5,7 @@
   <ol>
     <% activity.happenings.each do |happening| %>
     <li class="<%= happening.kind %>">
-      <%= happening.what %>
+      <%= happening.what.html_safe %>
     </li>
     <% end %>
   </ol>

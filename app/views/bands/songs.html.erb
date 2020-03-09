@@ -1,0 +1,7 @@
+<ol>
+<% @band.songs.each do |song| %>
+<li class="event">
+  <%= song.name %> - <%= song.quality %>
+</li>
+<% end %>
+</ol>
